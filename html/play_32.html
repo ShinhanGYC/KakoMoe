@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>play_16</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Bagel+Fat+One&display=swap" rel="stylesheet"> <!--게임화면 폰트(구글폰트)-->
+    <style>
+        body 
+        {
+            text-align: center; 
+            margin: 0;
+            height: 100vh; 
+            display: flex;                  /*안에 들어있는 것들 가운데 정렬 할 때 필요함*/
+            flex-direction: column;         /*세로 배치*/
+            justify-content: flex-start;    /*상단 배치*/
+            align-items: center;            /* 가로방향 중앙*/
+            font-family: 'Bagel Fat One', sans-serif;
+        }
+        h1
+        {
+            /*round 페이지 버튼이랑 같은 사이즈*/
+            width: 250px;            
+            height: 100px;            
+            font-size: 70px;         
+            background-color: #FFDDBD;  
+            color: #EB5C5C;            
+            border: none;            
+            border-radius: 10px;  
+            font-family: 'Bagel Fat One', sans-serif;
+            text-align: center;       
+        }
+
+
+        /*움짤*/
+        .gif-box
+        {
+            display: flex;              /*움짤 가로로*/
+            justify-content: center;    /*중간 정렬*/
+            align-items: center;
+            gap: 100px;
+            position: relative;     /*움짤 위에 겹치게*/
+        }
+        figure
+        {
+            display: flex;
+            flex-direction: column; /*움짤이랑 이름 세로로*/
+            align-items: center;
+            position: relative;     /*움짤 위에 겹치게*/
+        }
+        figcaption
+        {
+            font-size: 30px;
+            color: black;
+            margin-top: 20px;
+        }
+        img /*움짤 크기*/
+        {
+            width: 500px;
+            height: 300px;
+        }
+        .vs
+        {
+            position: absolute;     /*움짤 위에 겹치게*/
+            top: 35%;
+            left: 50%;
+            transform: translateX(-50%); /*가로 중앙 정렬*/
+            font-size: 50px;
+            color: #ED6464;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+
+<body>
+    <!--강 수 표시-->
+    <h1>32강</h1>
+
+    <!--움짤-->
+    <div class="gif-box">
+        <figure>
+            <img src="./소금상/[소금][1991][사카구치 켄타로].gif" alt="">
+            <figcaption>사카구치 켄타로</figcaption>
+        </figure>    
+
+        <div class="vs">VS</div>
+
+        <figure>    
+            <img src="./소금상/[소금][1982][아야노고].gif" alt="">
+            <figcaption>아야노 고</figcaption>
+        </figure>
+    </div>
+</body>
+</html>
