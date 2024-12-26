@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Movie Search</title>
+    <script src = "apikey.js"></script>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -69,6 +70,7 @@
     </style>
 </head>
 <body>
+	
     <div class="container">
         <h1>Movie Search</h1>
         <div class="search-bar">
@@ -79,14 +81,17 @@
     </div>
 
     <script>
-        const API_KEY = 'API KEY 위치';
-        const BASE_URL = 'https://api.themoviedb.org/3';
+        const API_KEY = config.TMDB_API_KEY;
+        const BASE_API_URL = 'https://api.themoviedb.org/3';
+        
+      	const BASE_WEB_URL = "https://www.themoviedb.org";
+        const languageType = "language=ko-KR";
 
         async function searchMulti() {
             const query = document.getElementById('searchInput').value;
             if (!query) return alert('Please enter a search term.');
 
-            const response = await fetch(`${BASE_URL}/search/multi?api_key=${API_KEY}&query=${encodeURIComponent(query)}&language=ko`);
+            const response = await fetch(`${BASE_API_URL}/search/multi?api_key=${API_KEY}&query=${encodeURIComponent(query)}&language=ko`);
             const data = await response.json();
 
             const resultsContainer = document.getElementById('results');
@@ -125,9 +130,12 @@
                 } else if (result.media_type === 'person') {
                     details = `<p><strong>Known For:</strong> ${result.known_for.map(item => item.title || item.name).join(', ')}</p>`;
                 }
+                
 
+          		const redirectHtml = `${BASE_WEB_URL}/${result.media_type}/${result.id}?${languageType}`;
+                
                 resultElement.innerHTML = `
-                    <img src="${imagePath}" alt="${title}">
+                	<a href='${redirectHtml}'><img src="${imagePath}" alt="${title}"></a>
                     <div class="result-details">
                         <h2>${title}</h2>
                         ${details}
