@@ -60,9 +60,28 @@
         <span class="round">라운드를 선택하세요</span>
     </h1>
     <form>
-        <input type="submit" value="32강" style="margin-right: 100px;">
-        <input type="submit" value="16강">
+        <input type="submit" value="32강" id = "round32" style="margin-right: 100px;">
+        <input type="submit" value="16강" id = "round16">
     </form>
+
+    <script>
+    /*32강 버튼 누르면*/
+        document.getElementById("round32").onclick = function(event)
+        {
+            event.preventDefault();         /*페이지 새로고침 안되게*/
+            window.location.href = "play_32.html";
+
+        }
+
+        /*16강 버튼 누르면*/
+        document.getElementById("round16").onclick = function(event)
+        {
+            event.preventDefault();         /*페이지 새로고침 안되게*/
+            window.location.href = "play_16.html";
+
+        }
+
+    </script>
 
 </body>
 </html>

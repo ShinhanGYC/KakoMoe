@@ -103,7 +103,7 @@
                 클릭하여 게임을 시작하세요!
             </p>
             <br>
-            <button class="modal-button">시작하기</button>
+            <button class="modal-button" id="StartGameButton">시작하기</button>
         </div>
     </div>
 
@@ -114,7 +114,11 @@
             event.preventDefault(); // 이게 있어야 모달 창 계속 볼 수 있음
             document.getElementById("ProjectModal").style.display = "flex"; // flex 
         }
-        // 시작하기 버튼 누른 뒤에 모달창 사라지면서 라운드 설정으로 넘어가야할 거 같은데 이건 아직 모르겠다 ㅎ
+        // 시작하기 버튼 > round 화면
+        document.getElementById("StartGameButton").onclick = function()
+        {
+            window.location.href = "round.html";
+        }
     </script>
 </body>
 </html>
