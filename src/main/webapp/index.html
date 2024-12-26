@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Search</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .search-bar {
+            display: flex;
+            margin-bottom: 20px;
+        }
+        .search-bar input {
+            flex: 1;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px 0 0 4px;
+        }
+        .search-bar button {
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            background-color: #007BFF;
+            color: white;
+            border-radius: 0 4px 4px 0;
+            cursor: pointer;
+        }
+        .search-bar button:hover {
+            background-color: #0056b3;
+        }
+        .result {
+            display: flex;
+            margin-bottom: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+        }
+        .result img {
+            width: 120px;
+            height: 180px;
+            object-fit: cover;
+            margin-right: 20px;
+            border-radius: 4px;
+        }
+        .result-details {
+            flex: 1;
+        }
+        .result-details h2 {
+            margin: 0 0 10px;
+            font-size: 18px;
+        }
+        .result-details p {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Movie Search</h1>
+        <div class="search-bar">
+            <input type="text" id="searchInput" placeholder="Search for a movie, TV show, or person...">
+            <button onclick="searchMulti()">Search</button>
+        </div>
+        <div id="results"></div>
+    </div>
+
+    <script>
+        const API_KEY = 'API KEY 위치';
+        const BASE_URL = 'https://api.themoviedb.org/3';
+
+        async function searchMulti() {
+            const query = document.getElementById('searchInput').value;
+            if (!query) return alert('Please enter a search term.');
+
+            const response = await fetch(`${BASE_URL}/search/multi?api_key=${API_KEY}&query=${encodeURIComponent(query)}&language=ko`);
+            const data = await response.json();
+
+            const resultsContainer = document.getElementById('results');
+            resultsContainer.innerHTML = '';
+
+            if (data.results.length === 0) {
+                resultsContainer.innerHTML = '<p>No results found.</p>';
+                return;
+            }
+
+            data.results.forEach(result => {
+                const resultElement = document.createElement('div');
+                resultElement.className = 'result';
+
+                let imagePath = '';
+                if (result.media_type === 'movie' || result.media_type === 'tv') {
+                    imagePath = result.poster_path ? `https://image.tmdb.org/t/p/w500${result.poster_path}` : 'https://via.placeholder.com/120x180?text=No+Image';
+                } else if (result.media_type === 'person') {
+                    imagePath = result.profile_path ? `https://image.tmdb.org/t/p/w500${result.profile_path}` : 'https://via.placeholder.com/120x180?text=No+Image';
+                }
+
+                let title = '';
+                if (result.media_type === 'movie') {
+                    title = result.title;
+                } else if (result.media_type === 'tv') {
+                    title = result.name;
+                } else if (result.media_type === 'person') {
+                    title = result.name;
+                }
+
+                let details = '';
+                if (result.media_type === 'movie') {
+                    details = `<p><strong>Release Date:</strong> ${result.release_date || 'N/A'}</p>`;
+                } else if (result.media_type === 'tv') {
+                    details = `<p><strong>First Air Date:</strong> ${result.first_air_date || 'N/A'}</p>`;
+                } else if (result.media_type === 'person') {
+                    details = `<p><strong>Known For:</strong> ${result.known_for.map(item => item.title || item.name).join(', ')}</p>`;
+                }
+
+                resultElement.innerHTML = `
+                    <img src="${imagePath}" alt="${title}">
+                    <div class="result-details">
+                        <h2>${title}</h2>
+                        ${details}
+                    </div>
+                `;
+
+                resultsContainer.appendChild(resultElement);
+            });
+        }
+    </script>
+</body>
+</html>
