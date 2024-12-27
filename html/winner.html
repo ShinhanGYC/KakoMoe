@@ -38,12 +38,10 @@
         /*움짤 및 이름*/
         figure
         {
-            
             display: flex;
             align-items: center;
             margin: 0;
         }
-        
         .namae
         {
             writing-mode: horizontal-tb;    /*가로 글씨*/
@@ -52,7 +50,31 @@
             margin-top: 20px;
             font-family: 'Bagel Fat One', sans-serif;
         }
+        img
+        {
+            position: relative;
+        }
+        .stamp 
+        {
+            position: absolute;
+            top: 55%; 
+            left: 67%; 
+            
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
 
+            writing-mode: horizontal-tb;    /*가로 글씨*/
+            font-size: 20px; 
+            color: #E10909; 
+            font-family: 'Bagel Fat One', sans-serif; 
+
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background-color: rgba(0, 0, 0, 0);
+            border: 5px solid #E10909;
+        }
 
         /*おしです*/
         .osi
@@ -76,11 +98,8 @@
         <figure>
             <img src="./소금상/[소금][1991][사카구치 켄타로].gif" alt=""><br>
             <figcaption class="namae">사카구치 켄타로</figcaption>
+            <div class="stamp">소금상</div>
         </figure> 
-
-        <div id="stamp">
-            <p id></p>
-        </div>
 
         <span class="osi">おし</span>
         <span class="desu">です ☆★</span>
