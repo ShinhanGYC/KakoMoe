@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>filmography</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bagel+Fat+One&display=swap" rel="stylesheet"> <!--게임화면 폰트(구글폰트)-->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet"> <!--플젝설명 폰트(구글폰트)-->
+
+    <style>
+        body
+        {
+            margin: 0;
+            padding: 20px;
+            display: flex;                  /*안에 들어있는 것들 가운데 정렬 할 때 필요함*/
+            justify-content: center;       
+            align-items: center;   
+            flex-direction: column;        
+        }
+
+
+        /* 우승자 정보 */
+        .filmo
+        {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            width: 100%;
+            flex-wrap: wrap;
+        }
+        .actor_photo
+        {
+            width: 500px;
+            height: 500px;
+        }
+        .actor_name
+        {
+            font-size: 25px;
+            color: black;
+            margin-top: 20px;
+            background-color: rgba(0, 0, 0, 0);
+            transform: translateX(80%);  
+        }
+
+
+        /* 우승자 필모 */
+        figcaption
+        {
+            width: 180px;
+            height: 60px;
+
+            transform: translateX(30%);  /* 버튼들 필모 사진 중간에 위치하게 좌측으로 30% 이동 */
+
+            font-size: 40px;
+            background-color: #FFDDBD;
+            color: #EB5C5C;
+            border: none;
+            border-radius: 10px;
+            font-family: 'Bagel Fat One', sans-serif;
+            text-align: center;
+            margin-bottom: 20px;
+
+        }
+        .filmo_debut, .filmo_daihyo, .filmo_newest {
+            width: 300px;
+            height: 500px;
+        }
+
+
+        /* 이런 배우는 어떠세요 */
+        .other_actor
+        {
+            font-size: 30px;
+            color: black;
+            margin-top: 20px;
+            background-color: rgba(0, 0, 0, 0);
+            font-weight: bold;
+            font-family: 'Noto Sans KR', sans-serif;
+        }
+
+
+        /* 다른 배우 추천 */
+        .recommend
+        {
+            display: flex;
+            justify-content: space-between;
+            gap: 100px;
+            margin-top: 40px;
+        }
+        .recommend_set
+        {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+        .recommend_actor_1, .recommend_actor_2, .recommend_actor_3
+        {
+            width: 300px;
+            height: 300px;
+        }
+        .recommend_flimo_1, .recommend_flimo_2, .recommend_flimo_3
+        {
+            width: 300px;
+            height: 500px;
+        }
+
+
+        /* 다시하기 버튼 */
+        input[type="submit"] 
+        {
+            width: 180px;
+            height: 60px;           
+            font-size: 40px;         
+            background-color: #FFDDBD;  
+            color: #EB5C5C;            
+            border: none;            
+            border-radius: 10px;  
+            font-family: 'Bagel Fat One', sans-serif;
+            margin-top: 40px;
+            transform: translateX(400%);  
+        }
+    </style>
+
+</head>
+
+
+<body>
+    <!--배우 정보-->
+    <div class="filmo">
+
+        <figure>
+            <img class="actor_photo" src="./소금상 전처리/[소금][1991][사카구치켄타로].jpg" alt="">
+            <figcaption class="actor_name">사카구치 켄타로</figcaption> 
+            <br><br><br><br><br><br><br><br><br>
+            <p class="other_actor">이런 배우는 어떠세요?</p>
+        </figure>   
+        
+
+        <figure>
+            <figcaption>데뷔작</figcaption>
+            <img class="filmo_debut" src="./필모.jpg" alt="">
+        </figure>   
+
+        <figure>
+            <figcaption>대표작</figcaption>
+            <img class="filmo_daihyo" src="./필모.jpg" alt="">
+        </figure>  
+
+        <figure>
+            <figcaption>최신작</figcaption>
+            <img class="filmo_newest"  src="./필모.jpg" alt="">
+        </figure>  
+
+        
+    </div>
+
+    <!--이런 배우는 어떠세요-->
+    <div class="recommend">
+        <div class="recommend_set">
+
+            <img class="recommend_actor_1" src="./소금상 전처리/[소금][1982][아야노고].jpg" alt="">
+            <img class="recommend_flimo_1" src="./필모2.jpg" alt="">
+        </div>
+
+        <div class="recommend_set">
+
+            <img class="recommend_actor_2" src="./소금상 전처리/[소금][1982][아야노고].jpg" alt="">
+            <img class="recommend_flimo_2" src="./필모2.jpg" alt="">
+        </div>
+
+        <div class="recommend_set">
+
+            <img class="recommend_actor_3" src="./소금상 전처리/[소금][1982][아야노고].jpg" alt="">
+            <img class="recommend_flimo_3" src="./필모2.jpg" alt="">
+        </div>
+    </div>
+    
+    <form>
+        <input type="submit" value="다시하기" id="retrybutton">
+    </form>
+    
+    <script>
+        // 다시하기 버튼 > start 화면
+        document.getElementById("retrybutton").onclick = function()
+        {
+            window.location.href = "start.html";
+        }
+    </script>
+</body>
+</html>
