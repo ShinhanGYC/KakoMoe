@@ -42,8 +42,9 @@ public class ActorDAO
 			ExceptionMgr.SetMode(ExceptionMgr.RUN_MODE.DEBUG);
 			
 			this.DBMgr = new DBOracleMgr();
-			
 			this.DBMgr.SetConnectionString("localhost", 1521, "educ", "educ", "XE");
+
+			//this.DBMgr.SetConnectionString("gyc2024.duckdns.org", 5004, "educ", "educ", "XE");
 			// -----------------------------------------------------------------------------
 		}
 		catch (Exception Ex)
