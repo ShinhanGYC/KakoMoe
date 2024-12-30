@@ -13,7 +13,6 @@
             margin: 0;
             padding: 20px;
             display: flex;                  /*안에 들어있는 것들 가운데 정렬 할 때 필요함*/
-            justify-content: center;       
             align-items: center;   
             flex-direction: column;        
         }
@@ -25,8 +24,7 @@
             display: flex;
             gap: 20px;
             justify-content: center;
-            width: 100%;
-            flex-wrap: wrap;
+            flex-wrap: nowrap;
         }
         .actor_photo
         {
@@ -49,7 +47,7 @@
             width: 180px;
             height: 60px;
 
-            transform: translateX(30%);  /* 버튼들 필모 사진 중간에 위치하게 좌측으로 30% 이동 */
+            transform: translateX(30%);     /* 버튼들 필모 사진 중간에 위치하게 좌측으로 30% 이동 */
 
             font-size: 40px;
             background-color: #FFDDBD;
@@ -61,7 +59,8 @@
             margin-bottom: 20px;
 
         }
-        .filmo_debut, .filmo_daihyo, .filmo_newest {
+        .filmo_debut, .filmo_daihyo, .filmo_newest 
+        {
             width: 300px;
             height: 500px;
         }
@@ -83,7 +82,6 @@
         .recommend
         {
             display: flex;
-            justify-content: space-between;
             gap: 100px;
             margin-top: 40px;
         }
