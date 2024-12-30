@@ -109,7 +109,35 @@ public class NewActorDAO
 		return bResult;
 	}
 	
-
+	public boolean takeRandomActorForWorldcup(int roundValue) throws Exception
+	{
+		String sSql = null;				// DML 문장
+		Object[] oPaValue = null;		// DML 문장에 필요한 파라미터 객체
+		boolean bResult = false;
+		try
+		{
+			if (this.DBMgr.DbConnect() == true)
+			{
+				// 배우정보 읽기 DML
+				sSql = "BEGIN SP_ACTOR_RANDOM(?,?); END;";
+				
+				// IN 파라미터 만큼 메모리 할당
+				oPaValue = new Object[1];
+				oPaValue[0] = roundValue;
+	
+				// DML 문장 실행
+				if (this.DBMgr.RunQuery(sSql, oPaValue, 2, true) == true)
+				{
+					bResult = true;
+				}
+			}
+		}
+		catch (Exception Ex)
+		{
+			ExceptionMgr.DisplayException(Ex);		// 예외처리(콘솔)
+		}
+		return bResult;
+	}
 }
 //#################################################################################################
 //<END>
