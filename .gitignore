@@ -2,3 +2,4 @@
 .classpath
 .metadata/
 .settings/
+/src/main/webapp/WEB-INF/lib/ojdbc8.jar
