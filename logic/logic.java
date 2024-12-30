@@ -1,60 +1,59 @@
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.Scanner;
 
-public class logic {
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+class ParticipantManager {
+    private ArrayList<String> participants;
 
-        
-        ArrayList<String> sio = new ArrayList<>();
-        ArrayList<String> shoyu = new ArrayList<>();
-        ArrayList<String> mayo = new ArrayList<>();
-        ArrayList<String> miso = new ArrayList<>();
-        
-        for (int i = 1; i <= 20; i++) {
-            sio.add("Sio_" + i);
-            shoyu.add("Shoyu_" + i);
-            mayo.add("Mayo_" + i);
-            miso.add("Miso_" + i);
+    public ParticipantManager() {
+        this.participants = new ArrayList<>();
+    }
+
+    public void addParticipants(String type, int count) {
+        for (int i = 1; i <= count; i++) {
+            participants.add(type + "_" + i);
         }
-        
+    }
 
-        System.out.println("라운드를 설정하세요. (32강 / 16강) : ");
-        int round = scanner.nextInt();
-        while (round != 16 && round != 32) {
-            System.out.println("잘못된 입력입니다. 32 또는 16을 선택하세요.");
-            System.out.print("다시 입력해주세요 : ");
-            round = scanner.nextInt();
+    public ArrayList<String> getUniqueShuffledParticipants(int totalSize, int perGroupSize) {
+        HashSet<String> selected = new HashSet<>();
+        ArrayList<String> subset = new ArrayList<>();
+        Collections.shuffle(participants);
+
+        for (String participant : participants) {
+            if (selected.size() >= totalSize) break;
+            if (!selected.contains(participant) && selected.size() % perGroupSize < perGroupSize) {
+                selected.add(participant);
+                subset.add(participant);
+            }
         }
 
-        System.out.println(round + "강을 선택하셨군요. 이상형 월드컵을 시작하겠습니다.");
+        return subset;
+    }
+}
 
-        int players = round / 4;
+class WorldCupGame {
+    private ArrayList<String> participants;
+    private Scanner scanner;
 
-        ArrayList<String> faces = new ArrayList<>();
-        faces.addAll(sio.subList(0, players));
-        faces.addAll(shoyu.subList(0, players));
-        faces.addAll(mayo.subList(0, players));
-        faces.addAll(miso.subList(0, players));
+    public WorldCupGame(ArrayList<String> participants) {
+        this.participants = participants;
+        this.scanner = new Scanner(System.in);
+    }
 
-        Collections.shuffle(faces);
-
-        ArrayList<String> participants = new ArrayList<>(faces);
-        
-        
+    public void startGame() {
         while (participants.size() > 1) {
+            int totalMatches = participants.size() / 2;
             System.out.println("\n" + participants.size() + "강을 시작합니다.");
             ArrayList<String> nextRound = new ArrayList<>();
 
             for (int i = 0; i < participants.size(); i += 2) {
-                int currentMatch = (i / 2) + 1;
-                int totalMatches = participants.size() / 2;
-
-                System.out.println("(" + currentMatch + "/" + totalMatches + ") 라운드를 진행합니다.");
                 String participant1 = participants.get(i);
                 String participant2 = participants.get(i + 1);
 
+                int currentMatch = (i / 2) + 1;
+                System.out.println("(" + currentMatch + "/" + totalMatches + ") 라운드를 진행합니다.");
                 System.out.println("1. " + participant1);
                 System.out.println("2. " + participant2);
                 System.out.print("승자: ");
@@ -70,17 +69,41 @@ public class logic {
                 } else {
                     nextRound.add(participant2);
                 }
-                System.out.println((choice == 1 ? participant1 : participant2) + "를 선택하셨군요.");               
-                if (participants.size() > 2) { 
-                    System.out.println("다음 라운드를 진행하겠습니다.");
-                }
-
             }
 
             participants = nextRound;
         }
 
         System.out.println("축하합니다. 당신의 최애는 " + participants.get(0) + " 입니다.");
+    }
+}
+
+public class logic {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        ParticipantManager manager = new ParticipantManager();
+
+        manager.addParticipants("Sio", 20);
+        manager.addParticipants("Shoyu", 20);
+        manager.addParticipants("Mayo", 20);
+        manager.addParticipants("Miso", 20);
+
+        System.out.println("라운드를 설정하세요. (32강 / 16강) : ");
+        int round = scanner.nextInt();
+        while (round != 16 && round != 32) {
+            System.out.println("잘못된 입력입니다. 32 또는 16을 선택하세요.");
+            System.out.print("다시 입력해주세요 : ");
+            round = scanner.nextInt();
+        }
+
+        System.out.println(round + "강을 선택하셨군요. 이상형 월드컵을 시작하겠습니다.");
+
+        int playersPerCategory = round / 4;
+        ArrayList<String> faces = manager.getUniqueShuffledParticipants(round, playersPerCategory);
+
+        WorldCupGame game = new WorldCupGame(faces);
+        game.startGame();
+
         scanner.close();
     }
 }
