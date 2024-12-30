@@ -210,11 +210,13 @@
 					out.println("<tr>");
 					out.println("<td>" + this.actorDAO.DBMgr.Rs.getInt("actno") + "</td>");
 					out.println("<td>" + this.actorDAO.DBMgr.Rs.getString("name") + "</td>");
-					out.println("<td><img alt=\"photo \" src=http://localhost:8081/" + photo +  "></td>");
+					out.println("<td><img alt=\"photo \" src=http://localhost:8081/images/" + photo +  "></td>");
 					out.println("</tr>");
+					System.out.println(photo);
 				}
 			}
 			
+    	
     	
     	
     	
