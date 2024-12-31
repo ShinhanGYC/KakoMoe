@@ -1,5 +1,5 @@
-<%@page import="BeansHome.Actor.NewActorDTO"%>
-<%@page import="BeansHome.Actor.NewActorDAO"%>
+<%@page import="BeansHome.Actor.ActorDTO"%>
+<%@page import="BeansHome.Actor.ActorDAO"%>
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -19,10 +19,7 @@
     }
 </script>
 </head>
-<%!
-	public NewActorDAO ActorDAO = new NewActorDAO();
-
-%>
+<%!public ActorDAO ActorDAO = new ActorDAO();%>
 <%
 	int actorID;
 	String actorIdString = null;
