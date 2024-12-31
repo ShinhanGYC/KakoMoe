@@ -1,4 +1,4 @@
-<%@page import="BeansHome.Actor.NewActorDTO"%>
+<%@page import="BeansHome.Actor.ActorDTO"%>
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -94,7 +94,7 @@
     </style>
 </head>
 <%
-    NewActorDTO firstActor = (NewActorDTO) session.getAttribute("firstActor");  
+ActorDTO firstActor = (ActorDTO) session.getAttribute("firstActor");  
 	String name = firstActor.getActorName();
 	String stamp = null;
 	if (firstActor.getFaceCode() == 1) {
