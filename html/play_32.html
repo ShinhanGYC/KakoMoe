@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>play_16</title>
+    <title>play_32</title>
 
     <link href="https://fonts.googleapis.com/css2?family=Bagel+Fat+One&display=swap" rel="stylesheet"> <!--게임화면 폰트(구글폰트)-->
     <style>
@@ -40,14 +40,12 @@
             justify-content: center;    /*중간 정렬*/
             align-items: center;
             gap: 100px;
-            position: relative;     /*움짤 위에 겹치게*/
         }
         figure
         {
             display: flex;
             flex-direction: column; /*움짤이랑 이름 세로로*/
             align-items: center;
-            position: relative;     /*움짤 위에 겹치게*/
         }
         figcaption
         {
@@ -57,21 +55,33 @@
         }
         img /*움짤 크기*/
         {
-            width: 500px;
-            height: 300px;
+            width: 700px;
+            height: 400px;
+            
         }
         .vs
         {
-            position: absolute;     /*움짤 위에 겹치게*/
+            position: absolute;     
             top: 35%;
             left: 50%;
             transform: translateX(-50%); /*가로 중앙 정렬*/
-            font-size: 50px;
+            font-size: 70px;
             color: #ED6464;
             font-weight: bold;
         }
+
+        /* 선택된 움짤 */
+        .selected {
+            position: absolute;
+            top: 50%;               
+            left: 50%;              
+            transform: translate(-50%, -50%) scale(1.6); /* 크기 1.6배 커지게 */
+            z-index: 10;            /* 클릭된 움짤이 다른 요소 위로 이동되게 */
+            transition: transform 0.5s ease, left 0.5s ease, top 0.5s ease; /*부드럽게 선택되게*/
+        }
     </style>
 </head>
+
 
 
 <body>
@@ -80,17 +90,36 @@
 
     <!--움짤-->
     <div class="gif-box">
-        <figure>
+        <figure class="gif-item">
             <img src="./소금상/[소금][1991][사카구치 켄타로].gif" alt="">
             <figcaption>사카구치 켄타로</figcaption>
         </figure>    
 
         <div class="vs">VS</div>
 
-        <figure>    
+        <figure class="gif-item">    
             <img src="./소금상/[소금][1982][아야노고].gif" alt="">
             <figcaption>아야노 고</figcaption>
         </figure>
     </div>
+
+    <script>
+        const gifItems = document.querySelectorAll('.gif-item img');
+    
+        gifItems.forEach(function(gif) 
+        {
+            gif.addEventListener('click', function() 
+            {
+                // 하나의 움짤만 선택되도록 
+                gifItems.forEach(function(item) 
+                {
+                    item.classList.remove('selected');
+                });
+
+                // 선택된 움짤에 효과 추가
+                gif.classList.add('selected');
+            });
+        });
+    </script>
 </body>
 </html>
