@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import BeansHome.Actor.NewActorDAO;
-import BeansHome.Actor.NewActorDTO;
+import BeansHome.Actor.ActorDAO;
+import BeansHome.Actor.ActorDTO;
 import java.util.Collections;
 /**
  * Servlet implementation class roundInitServlet
@@ -40,10 +40,10 @@ public class roundInitServlet extends HttpServlet {
         String round	 = requestURI.replaceAll("[^0-9]","");
 		System.out.println("roundInitServlet round : " + round);
 		
-		NewActorDAO ActorDAO = new NewActorDAO();
+		ActorDAO ActorDAO = new ActorDAO();
 		
 		
-		ArrayList<NewActorDTO> ActorDTOList = new ArrayList<>();
+		ArrayList<ActorDTO> ActorDTOList = new ArrayList<>();
 		
 		
 		
@@ -59,7 +59,7 @@ public class roundInitServlet extends HttpServlet {
 				
 				if (bContinue == true) {
 					while(ActorDAO.DBMgr.Rs.next() == true) {
-						ActorDTOList.add(new NewActorDTO());
+						ActorDTOList.add(new ActorDTO());
 						ActorDTOList.get(ActorDTOList.size()-1).setActorID(ActorDAO.DBMgr.Rs.getInt("actor_id"));
 						ActorDTOList.get(ActorDTOList.size()-1).setActorName(ActorDAO.DBMgr.Rs.getString("actor_name"));
 						ActorDTOList.get(ActorDTOList.size()-1).setFaceCode(ActorDAO.DBMgr.Rs.getInt("face_code"));
