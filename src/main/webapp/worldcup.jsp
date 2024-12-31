@@ -1,5 +1,5 @@
-<%@page import="BeansHome.Actor.NewActorDAO"%>
-<%@page import="BeansHome.Actor.NewActorDTO" %>
+<%@page import="BeansHome.Actor.ActorDAO"%>
+<%@page import="BeansHome.Actor.ActorDTO" %>
 <%@page import="java.util.ArrayList" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -13,24 +13,24 @@
 <body>
     <!-- 라운드 정보 출력 -->
     <p>선택된 라운드: 
-        <% 
-            String round = (String) session.getAttribute("round");
-            if (round != null) {
-                out.print(round);
-            } else {
-                out.print("정보 없음");
-            }
-        %>
+        <%
+    String round = (String) session.getAttribute("round");
+                if (round != null) {
+                    out.print(round);
+                } else {
+                    out.print("정보 없음");
+                }
+    %>
     </p>
 
     <!-- ActorDTOList 출력 -->
     <%
-        ArrayList<NewActorDTO> actorList =  (ArrayList) session.getAttribute("list");
-        if (actorList != null && !actorList.isEmpty()) {
-            NewActorDTO firstActor = actorList.get(0);
-            session.setAttribute("firstActor", firstActor); 
+    ArrayList<ActorDTO> actorList =  (ArrayList) session.getAttribute("list");
+            if (actorList != null && !actorList.isEmpty()) {
+                ActorDTO firstActor = actorList.get(0);
+                session.setAttribute("firstActor", firstActor);
     %>
-        <p>참가자 수: <%= actorList.size() %></p>
+        <p>참가자 수: <%=actorList.size()%></p>
         <h2>참가자 리스트</h2>
 		<table border="1">
 		    <thead>
@@ -42,8 +42,8 @@
 		        </tr>
 		    </thead>
 		    <tbody>
-		        <% 
-		            for (NewActorDTO actor : actorList) { 
+		        <%
+		        for (ActorDTO actor : actorList) {
 		        %>
 		        <tr>
 		            <td><%= actor.getActorID() %></td>
