@@ -10,7 +10,7 @@ import DAO.DBOracleMgr;
 * ActorDAO		: Actor DAO 클래스<br>
 * Inheritance	: None | 부모 클래스 명
 ***********************************************************************/
-public class NewActorDAO
+public class OldActorDAO
 {
 	// —————————————————————————————————————————————————————————————————————————————————————
 	// 전역상수 관리 - 필수영역
@@ -32,7 +32,7 @@ public class NewActorDAO
 	 * ActorDAO()	: 생성자
 	 * @param void	: None
 	 ***********************************************************************/
-	public NewActorDAO()
+	public OldActorDAO()
 	{
 		try
 		{
@@ -42,8 +42,9 @@ public class NewActorDAO
 			ExceptionMgr.SetMode(ExceptionMgr.RUN_MODE.DEBUG);
 			
 			this.DBMgr = new DBOracleMgr();
-			
-			this.DBMgr.SetConnectionString("gyc2024.duckdns.org", 5004, "educ", "educ", "XE");
+			this.DBMgr.SetConnectionString("localhost", 1521, "educ", "educ", "XE");
+
+			//this.DBMgr.SetConnectionString("gyc2024.duckdns.org", 5004, "educ", "educ", "XE");
 			// -----------------------------------------------------------------------------
 		}
 		catch (Exception Ex)
@@ -60,11 +61,11 @@ public class NewActorDAO
 	// —————————————————————————————————————————————————————————————————————————————————————
 	/***********************************************************************
 	 * ReadActorList()	: 배우정보 읽기
-	 * @param  ActorDTO	: 배우정보 DTO(조건용)
+	 * @param  OldActorDTO	: 배우정보 DTO(조건용)
 	 * @return boolean	: 쿼리 실행 여부(true|false)
 	 * @throws Exception 
 	 ***********************************************************************/
-	public boolean ReadActorList(NewActorDTO actorDTO) throws Exception
+	public boolean ReadActorList(OldActorDTO actorDTO) throws Exception
 	{
 		String sSql = null;				// DML 문장
 		Object[] oPaValue = null;		// DML 문장에 필요한 파라미터 객체
@@ -75,24 +76,24 @@ public class NewActorDAO
 			// -----------------------------------------------------------------------------
 			// 배우정보 읽기
 			// -----------------------------------------------------------------------------
-			if (actorDTO.getActorName() != null)
+			if (actorDTO.getName() != null)
 				
 			{
 				if (this.DBMgr.DbConnect() == true)
 				{
 					// 배우정보 읽기 DML
-					sSql = "BEGIN SP_ACTOR_R(?,?,?); END;";
+					sSql = "BEGIN SP_TEST_ACTOR_R(?,?,?,?); END;";
 					
 					// IN 파라미터 만큼 메모리 할당
-					oPaValue = new Object[2];
+					oPaValue = new Object[3];
 					
-					
-					oPaValue[0] = actorDTO.getActorName();
-					oPaValue[1] = actorDTO.getFaceCode();
+					oPaValue[0] = "0";
+					oPaValue[1] = actorDTO.getName();
+					oPaValue[2] = "-1";
 				
 
 					// DML 문장 실행
-					if (this.DBMgr.RunQuery(sSql, oPaValue, 3, true) == true)
+					if (this.DBMgr.RunQuery(sSql, oPaValue, 4, true) == true)
 					{
 						bResult = true;
 					}
@@ -109,64 +110,34 @@ public class NewActorDAO
 		return bResult;
 	}
 	
-	public boolean takeRandomActorForWorldcup(int roundValue) throws Exception
-	{
-		String sSql = null;				// DML 문장
+	public boolean insertActor(OldActorDTO actorDTO) throws Exception {
+	    String sSql = null;				// DML 문장
 		Object[] oPaValue = null;		// DML 문장에 필요한 파라미터 객체
 		boolean bResult = false;
-		try
-		{
-			if (this.DBMgr.DbConnect() == true)
+		
+	    try {
+	    	if (this.DBMgr.DbConnect() == true)
 			{
-				// 배우정보 읽기 DML
-				sSql = "BEGIN SP_ACTOR_RANDOM(?,?); END;";
+	    	sSql = "BEGIN SP_TEST_ACTOR_U(?,?,?); COMMIT; END;";
+				System.out.println(sSql);
+				oPaValue = new Object[3];
+			
 				
-				// IN 파라미터 만큼 메모리 할당
-				oPaValue = new Object[1];
-				oPaValue[0] = roundValue;
-	
-				// DML 문장 실행
-				if (this.DBMgr.RunQuery(sSql, oPaValue, 2, true) == true)
-				{
+				oPaValue[0] = "0"; 
+				oPaValue[1] = actorDTO.getName(); 
+				oPaValue[2] = actorDTO.getPhoto();
+				if (this.DBMgr.RunQuery(sSql, oPaValue, 0 , false) == true){
 					bResult = true;
 				}
 			}
-		}
-		catch (Exception Ex)
-		{
+	    }
+	    catch (Exception Ex){
 			ExceptionMgr.DisplayException(Ex);		// 예외처리(콘솔)
 		}
+		
 		return bResult;
 	}
-	public boolean takeRecommendActorSameFaceCode(int actorId) throws Exception
-	{
-		String sSql = null;				// DML 문장
-		Object[] oPaValue = null;		// DML 문장에 필요한 파라미터 객체
-		boolean bResult = false;
-		try
-		{
-			if (this.DBMgr.DbConnect() == true)
-			{
-				// 배우정보 읽기 DML
-				sSql = "BEGIN SP_ACTOR_RECOMMEND(?,?); END;";
-				
-				// IN 파라미터 만큼 메모리 할당
-				oPaValue = new Object[1];
-				oPaValue[0] = actorId;
-	
-				// DML 문장 실행
-				if (this.DBMgr.RunQuery(sSql, oPaValue, 2, true) == true)
-				{
-					bResult = true;
-				}
-			}
-		}
-		catch (Exception Ex)
-		{
-			ExceptionMgr.DisplayException(Ex);		// 예외처리(콘솔)
-		}
-		return bResult;
-	}
+
 }
 //#################################################################################################
 //<END>
