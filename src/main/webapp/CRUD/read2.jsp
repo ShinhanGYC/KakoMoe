@@ -1,4 +1,4 @@
-<%@page import="BeansHome.Actor.NewActorDAO"%>
+<%@page import="BeansHome.Actor.ActorDAO"%>
 <%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <% request.setCharacterEncoding("UTF-8");%>
 <!DOCTYPE html>
@@ -104,15 +104,13 @@
 	- this 로 접근 가능 : 같은 페이지가 여러번 갱신 되더라도 변수/함수 유지 됨
 	- 즉 현재 페이지가 여러번 갱신 되는 경우 선언문은 한번만 실행 됨
 ------------------------------------------------------------------------------%>
-<%!
-	// ---------------------------------------------------------------------
+<%!// ---------------------------------------------------------------------
 	// [JSP 전역 변수/함수 선언]
 	// ---------------------------------------------------------------------
 	
 	// 배우정보 검색용 DAO 객체 
-	public NewActorDAO ActorDAO = new NewActorDAO();
-	// ---------------------------------------------------------------------
-%>
+	public ActorDAO ActorDAO = new ActorDAO();
+	// ---------------------------------------------------------------------%>
 <%--------------------------------------------------------------------------
 [JSP 지역 변수 선언 및 로직 구현 영역 - 스크립트릿 영역]
 	- this 로 접근 불가 : 같은 페이지가 여러번 갱신되면 변수/함수 유지 안 됨
@@ -166,7 +164,7 @@
 						: class	- Beans 클래스 명
  						: scope	- Beans 사용 기간을 request 단위로 지정 Hello.HelloDTO 
 	--------------------------------------------------------------------------%>
-	<jsp:useBean id="ActorDTO" class="BeansHome.Actor.NewActorDTO" scope="request"></jsp:useBean>
+	<jsp:useBean id="ActorDTO" class="BeansHome.Actor.ActorDTO" scope="request"></jsp:useBean>
 	
 	<%----------------------------------------------------------------------
 	Beans 속성 지정 방법1	: Beans Property에 * 사용
