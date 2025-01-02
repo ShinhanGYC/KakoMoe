@@ -24,51 +24,55 @@
             writing-mode: vertical-rl;      /*세로 글씨*/
             font-size: 80px;
             font-weight: normal;            
-
         }
-
 
         /*わたしがあなたの*/
         .watasi
         {
             color: #EB5C5C;
         }
-        
 
-        /*움짤 및 이름*/
+        /* 움짤 및 이름 */
         figure
         {
             display: flex;
-            align-items: center;
+            flex-direction: row;           /* 이미지와 이름을 가로로 배치 */
+            justify-content: center;       /* 이미지와 이름을 가로로 중앙 정렬 */
+            align-items: center;           /* 세로로 중앙 정렬 */
             margin: 0;
+            position: relative;            /* .stamp의 위치를 기준으로 설정 */
         }
+
+        /* 이미지 스타일 */
+        img
+        {
+            max-width: 100%; /* 이미지가 부모의 크기를 넘어가지 않게 */
+            height: auto;    /* 비율 유지 */
+        }
+
+        /* 이름 스타일 */
         .namae
         {
-            writing-mode: horizontal-tb;    /*가로 글씨*/
+            writing-mode: horizontal-tb;     /* 이름을 가로로 설정 */
             font-size: 30px;
             color: black;
             margin-top: 20px;
             font-family: 'Bagel Fat One', sans-serif;
         }
-        img
-        {
-            position: relative;
-        }
+
+        /* 도장 스타일 */
         .stamp 
         {
             position: absolute;
-            top: 55%; 
-            left: 67%; 
-            
-            display: flex; 
-            justify-content: center; 
-            align-items: center; 
-
+            top: 80%;
+            left: 70%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             writing-mode: horizontal-tb;    /*가로 글씨*/
-            font-size: 20px; 
-            color: #E10909; 
-            font-family: 'Bagel Fat One', sans-serif; 
-
+            font-size: 20px;
+            color: #E10909;
+            font-family: 'Bagel Fat One', sans-serif;
             width: 100px;
             height: 100px;
             border-radius: 50%;
@@ -76,13 +80,14 @@
             border: 5px solid #E10909;
         }
 
-        /*おしです*/
+        /* 큰 텍스트 스타일 */
         .osi
         {
-            font-size: 128px;           /*오시는 크고 굵게*/
+            font-size: 128px;
             font-weight: bold;
             color: #EB5C5C;
         }
+
         .desu
         {
             color: #EB5C5C;
@@ -104,6 +109,5 @@
         <span class="osi">おし</span>
         <span class="desu">です ☆★</span>
     </h1>
-        
 </body>
 </html>
