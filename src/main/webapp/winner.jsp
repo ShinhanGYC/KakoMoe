@@ -10,7 +10,13 @@
     <title>winner</title>
     <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c&display=swap" rel="stylesheet"> <!--일본어 폰트(구글폰트)-->
     <link href="https://fonts.googleapis.com/css2?family=Bagel+Fat+One&display=swap" rel="stylesheet"> <!--게임화면 폰트(구글폰트)-->
+    <script>
     
+    // 4초 후 recommend.jsp로 리다이렉트
+    setTimeout(function() {
+        window.location.href = 'recommend.jsp';
+    }, 4000);
+</script>
     <style>
        body 
         {
@@ -94,16 +100,16 @@
     </style>
 </head>
 <%
-ActorDTO firstActor = (ActorDTO) session.getAttribute("firstActor");  
-	String name = firstActor.getActorName();
+ActorDTO winnerActor = (ActorDTO) session.getAttribute("winnerActor");  
+	String name = winnerActor.getActorName();
 	String stamp = null;
-	if (firstActor.getFaceCode() == 1) {
+	if (winnerActor.getFaceCode() == 1) {
 		stamp = "소금";
 	}
-	else if (firstActor.getFaceCode() == 2) {
+	else if (winnerActor.getFaceCode() == 2) {
 		stamp = "간장";
 	}
-	else if (firstActor.getFaceCode() == 3) {
+	else if (winnerActor.getFaceCode() == 3) {
 		stamp = "마요네즈";
 	}
 	else{
