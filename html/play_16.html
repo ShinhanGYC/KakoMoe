@@ -32,7 +32,6 @@
             text-align: center;       
         }
 
-
         /*움짤*/
         .gif-box
         {
@@ -57,7 +56,6 @@
         {
             width: 700px;
             height: 400px;
-            
         }
         .vs
         {
@@ -79,10 +77,13 @@
             z-index: 10;            /* 클릭된 움짤이 다른 요소 위로 이동되게 */
             transition: transform 0.5s ease, left 0.5s ease, top 0.5s ease; /*부드럽게 선택되게*/
         }
+
+        /* 선택하면 선택된 움짤이랑 강 수 외 나머지는 안보이게 */
+        .hidden {
+            display: none;
+        }
     </style>
 </head>
-
-
 
 <body>
     <!--강 수 표시-->
@@ -105,7 +106,9 @@
 
     <script>
         const gifItems = document.querySelectorAll('.gif-item img');
-    
+        const vsText = document.querySelector('.vs');
+        const figures = document.querySelectorAll('.gif-item');
+
         gifItems.forEach(function(gif) 
         {
             gif.addEventListener('click', function() 
@@ -118,6 +121,15 @@
 
                 // 선택된 움짤에 효과 추가
                 gif.classList.add('selected');
+
+                // 강 수는 남기고, 나머지 요소들 숨기기
+                document.querySelector('h1').classList.remove('hidden');
+                vsText.classList.add('hidden');
+                figures.forEach(function(figure) {
+                    if (!figure.contains(gif.closest('figure'))) {
+                        figure.classList.add('hidden');
+                    }
+                });
             });
         });
     </script>
