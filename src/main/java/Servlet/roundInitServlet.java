@@ -3,6 +3,7 @@ package Servlet;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -94,11 +95,14 @@ public class roundInitServlet extends HttpServlet {
 		
 		Collections.shuffle(ActorDTOList);
         HttpSession session = request.getSession();
-        session.setAttribute("round", round); // round 값 전달
+        
+        session.setAttribute("totalRound", Integer.parseInt(round)); // round 값 전달
+        session.setAttribute("currentRound", 1);
         session.setAttribute("list", ActorDTOList); // ActorDTOList 전달
-
-        // 리다이렉트 처리
-        response.sendRedirect("worldcup.jsp");
+        
+        
+        RequestDispatcher dispatcher = request.getRequestDispatcher("roundPlayServlet");
+        dispatcher.forward(request, response);
 		
 	
 	}
