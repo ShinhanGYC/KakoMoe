@@ -63,6 +63,11 @@ public class roundInitServlet extends HttpServlet {
 						ActorDTOList.get(ActorDTOList.size()-1).setActorID(ActorDAO.DBMgr.Rs.getInt("actor_id"));
 						ActorDTOList.get(ActorDTOList.size()-1).setActorName(ActorDAO.DBMgr.Rs.getString("actor_name"));
 						ActorDTOList.get(ActorDTOList.size()-1).setFaceCode(ActorDAO.DBMgr.Rs.getInt("face_code"));
+						ActorDTOList.get(ActorDTOList.size()-1).setFaceName(ActorDAO.DBMgr.Rs.getString("face_name"));
+						ActorDTOList.get(ActorDTOList.size()-1).setActorDebut(ActorDAO.DBMgr.Rs.getString("actor_debut"));
+						ActorDTOList.get(ActorDTOList.size()-1).setActorHit(ActorDAO.DBMgr.Rs.getString("actor_hit"));
+						ActorDTOList.get(ActorDTOList.size()-1).setActorNewest(ActorDAO.DBMgr.Rs.getString("actor_newest"));
+						ActorDTOList.get(ActorDTOList.size()-1).setActorProfilePhoto(ActorDAO.DBMgr.Rs.getString("actor_profile_photo"));
 						ActorDTOList.get(ActorDTOList.size()-1).setActorWorldcupPhoto(ActorDAO.DBMgr.Rs.getString("actor_worldcup_photo"));
 						}
 					}
