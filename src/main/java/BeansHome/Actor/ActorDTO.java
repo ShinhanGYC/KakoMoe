@@ -39,11 +39,12 @@ public class ActorDTO
 	/** actorName	: Beans 배우이름 필드(JSP 입력 객체와 1:1 대응, 소문자로 시작) */
 	private String	actorName = null;
 	/** actorDebut	: Beans 배우데뷔작 필드(JSP 입력 객체와 1:1 대응, 소문자로 시작) */
-	private String	acotrDebut = null;
+	private String	actorDebut = null;
+
 	/** actorDebut	: Beans 배우히트작 필드(JSP 입력 객체와 1:1 대응, 소문자로 시작) */
-	private String	acotrHit = null;
+	private String	actorHit = null;
 	/** actorDebut	: Beans 배우최신작 필드(JSP 입력 객체와 1:1 대응, 소문자로 시작) */
-	private String	acotrNewest = null;
+	private String	actorNewest = null;
 
 	// FACE TABLE FIELDS
 	/** faceName	: Beans 얼굴상 이름 필드(JSP 입력 객체와 1:1 대응, 소문자로 시작) */
@@ -115,33 +116,28 @@ public class ActorDTO
 	}
 
 
-	public String getAcotrDebut() {
-		return acotrDebut;
+	public String getActorDebut() {
+		return actorDebut;
 	}
 
-
-	public void setAcotrDebut(String acotrDebut) {
-		this.acotrDebut = acotrDebut;
+	public void setActorDebut(String actorDebut) {
+		this.actorDebut = actorDebut;
 	}
 
-
-	public String getAcotrHit() {
-		return acotrHit;
+	public String getActorHit() {
+		return actorHit;
 	}
 
-
-	public void setAcotrHit(String acotrHit) {
-		this.acotrHit = acotrHit;
+	public void setActorHit(String actorHit) {
+		this.actorHit = actorHit;
 	}
 
-
-	public String getAcotrNewest() {
-		return acotrNewest;
+	public String getActorNewest() {
+		return actorNewest;
 	}
 
-
-	public void setAcotrNewest(String acotrNewest) {
-		this.acotrNewest = acotrNewest;
+	public void setActorNewest(String actorNewest) {
+		this.actorNewest = actorNewest;
 	}
 
 
