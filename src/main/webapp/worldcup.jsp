@@ -28,7 +28,7 @@
     ArrayList<ActorDTO> actorList =  (ArrayList) session.getAttribute("list");
             if (actorList != null && !actorList.isEmpty()) {
                 ActorDTO firstActor = actorList.get(0);
-                session.setAttribute("firstActor", firstActor);
+                session.setAttribute("winnerActor", firstActor);
     %>
         <p>참가자 수: <%=actorList.size()%></p>
         <h2>참가자 리스트</h2>
