@@ -33,6 +33,27 @@
         {
             color: #EF7979;
         }
+        .emoji-1, .emoji-2
+        {
+            color: #EB5C5C;
+            font-size: 50px;
+            position: absolute;
+            animation: emoji-swing 2s ease-in-out infinite; /*애니메이션 : 2초, 계속 흔들리게 */
+        }
+        /* 왼쪽 하트 */
+        .emoji-1
+        {
+            left: 540px; /*더 좋은 방법을 모르겠음...*/
+        }
+        /* 하트 이모지 애니메이션 */
+        @keyframes emoji-swing     /*좌우로 흔들리는 것 처럼*/
+        {
+            0% { transform: rotate(0deg); }
+            25% { transform: rotate(10deg); }
+            50% { transform: rotate(0deg); }
+            75% { transform: rotate(-10deg); }
+            100% { transform: rotate(0deg); }
+        }
 
 
         /* 버튼 */
@@ -102,7 +123,7 @@
         .modal-button 
         {
             padding: 10px 20px;
-            background: linear-gradient(135deg, #FF7B7B, #FFD1D1); /*그라데이션 (135도 방향, 첫번째 색상, 두번째 색상)*/
+            background: linear-gradient(135deg, #FF7B7B, #FFD1D1);  /*그라데이션 (135도 방향, 첫번째 색상, 두번째 색상)*/
             color: white;
             border: none;
             border-radius: 30px;                                        /*둥근 모서리*/ 
@@ -114,8 +135,8 @@
         /* 버튼에 마우스 올렸을 때 효과 */
         .modal-button:hover 
         {
-            transform: scale(1.1);                                       /*버튼 크기 1.1배 키우기*/
-            background: linear-gradient(135deg, #FFD1D1, #FF7B7B);  /*그라데이션 반대로*/
+            transform: scale(1.1);                                          /*버튼 크기 1.1배 키우기*/
+            background: linear-gradient(135deg, #FFD1D1, #FF7B7B);      /*그라데이션 반대로*/
         }
     </style>
 </head>
@@ -125,7 +146,9 @@
 <body>
     <!--시작화면-->
     <h1><span class="heart">심쿵!</span><br>
+        <span class="emoji-1">💘</span>
         <span class="title">이상형 뽑기 대작전</span>
+        <span class="emoji-2">💘</span>
     </h1>
     <form>
         <input type="submit" value="Start" id="StartButton">
@@ -135,7 +158,7 @@
     <!--모달-->
     <div id="ProjectModal" class="modal">
         <div class="modal-content">
-            <h2>게임 설명</h2>
+            <h2>게임 설명 🎮</h2>
             <p>이 게임은 일본의 얼굴상과 이상형 월드컵을 활용하여<br>
                 내 취향인 배우의 필모그래피까지 확인하는 게임입니다!<br>
                 클릭하여 게임을 시작하세요!
