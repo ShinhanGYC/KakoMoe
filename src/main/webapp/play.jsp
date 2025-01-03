@@ -7,8 +7,12 @@
 // 현재 라운드와 상태 관리
 int totalRound = 0;
 int currentRound  = 0;
+ActorDTO leftActor = null;
+ActorDTO rightActor = null;
+List<ActorDTO> actorList = null;
 
 
+//-------------------------------//
 if (session.getAttribute("totalRound") == null || session.getAttribute("currentRound") == null) {
 	response.sendRedirect("error.jsp");
 	return;
@@ -16,13 +20,12 @@ if (session.getAttribute("totalRound") == null || session.getAttribute("currentR
 
 totalRound = (Integer) session.getAttribute("totalRound");
 currentRound = (Integer) session.getAttribute("currentRound");
-
-List<ActorDTO> actorList = null;
-
-
 actorList = (List)session.getAttribute("currentPair");
 
-System.out.println(actorList.get(0).getActorName() + " VS " + actorList.get(1).getActorName());
+
+leftActor = actorList.get(0);
+rightActor = actorList.get(1);
+
 
 if (actorList == null || actorList.isEmpty()) {		
 	response.sendRedirect("error.jsp");
@@ -38,7 +41,13 @@ if (actorList == null || actorList.isEmpty()) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= totalRound %>강(<%=totalRound / 2%>/<%=currentRound%>)</title>
+    <title>
+		<% if (totalRound == 2) { %>
+		<%="결승" %>
+		<% } else { %>
+		<%= totalRound %>강(<%=totalRound / 2%>/<%=currentRound%>)
+		<% } %>
+    </title>
 
     <link href="https://fonts.googleapis.com/css2?family=Bagel+Fat+One&display=swap" rel="stylesheet"> <!--게임화면 폰트(구글폰트)-->
     <style>
@@ -126,42 +135,50 @@ if (actorList == null || actorList.isEmpty()) {
 %>
 <body>
     <!--강 수 표시-->
-    <h1><%= totalRound %>강</h1>
+    
+    <h1>
+    <% if (totalRound == 2) { %>
+    <%="결승" %>
+	<% } else { %>
+	<%=totalRound + "강"%>
+	<% } %>
+	
+    </h1>
 
     <!--움짤-->
-    <div class="gif-box">
-        <figure class="gif-item">
-            <img src="./소금상/[소금][1991][사카구치 켄타로].gif" alt="">
-            <figcaption>사카구치 켄타로</figcaption>
-        </figure>    
+    <form id="roundForm" action="roundPlayServlet" method="post">
+        <div class="gif-box">
+            <figure class="gif-item">
+                <img src="http://localhost:8081/gif/<%= leftActor.getActorWorldcupPhoto() %>" alt="" data-actor-id="<%= leftActor.getActorID() %>">
+                <figcaption><%= leftActor.getActorName() %></figcaption>
+            </figure>    
 
-        <div class="vs">VS</div>
+            <div class="vs">VS</div>
 
-        <figure class="gif-item">    
-            <img src="./소금상/[소금][1982][아야노고].gif" alt="">
-            <figcaption>아야노 고</figcaption>
-        </figure>
-    </div>
+            <figure class="gif-item">    
+                <img src="http://localhost:8081/gif/<%= rightActor.getActorWorldcupPhoto() %>" alt="" data-actor-id="<%= rightActor.getActorID() %>">
+                <figcaption><%= rightActor.getActorName() %></figcaption>
+            </figure>
+        </div>
+        <input type="hidden" id="selectedActor" name="selectedActor" value="">
+    </form>
 
     <script>
         const gifItems = document.querySelectorAll('.gif-item img');
         const vsText = document.querySelector('.vs');
         const figures = document.querySelectorAll('.gif-item');
+        const selectedActorInput = document.getElementById('selectedActor');
+        const roundForm = document.getElementById('roundForm');
 
-        gifItems.forEach(function(gif) 
-        {
-            gif.addEventListener('click', function() 
-            {
-                // 하나의 움짤만 선택되도록 
-                gifItems.forEach(function(item) 
-                {
+        gifItems.forEach(function(gif) {
+            gif.addEventListener('click', function() {
+                // 선택된 값 초기화 및 효과 추가
+                gifItems.forEach(function(item) {
                     item.classList.remove('selected');
                 });
-
-                // 선택된 움짤에 효과 추가
                 gif.classList.add('selected');
 
-                // 강 수는 남기고, 나머지 요소들 숨기기
+                // 숨기기 처리
                 document.querySelector('h1').classList.remove('hidden');
                 vsText.classList.add('hidden');
                 figures.forEach(function(figure) {
@@ -169,8 +186,17 @@ if (actorList == null || actorList.isEmpty()) {
                         figure.classList.add('hidden');
                     }
                 });
+
+                // 선택된 배우 ID 저장
+                const selectedActorId = gif.dataset.actorId;
+                selectedActorInput.value = selectedActorId;
+                // 3초 뒤에 폼 제출
+                setTimeout(function() {
+                    roundForm.submit();
+                }, 3000); // 3000ms = 3초
             });
         });
     </script>
 </body>
+
 </html>

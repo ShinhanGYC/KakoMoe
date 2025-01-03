@@ -122,7 +122,7 @@ ActorDTO winnerActor = (ActorDTO) session.getAttribute("winnerActor");
         <span class="watasi">わたしがあなたの</span><br>
  
         <figure>
-            <img src="./123.gif" alt="gif"><br>
+            <img src="http://localhost:8081/gif/<%= winnerActor.getActorWorldcupPhoto() %>" alt="gif"><br>
             <figcaption class="namae"><%=name%> </figcaption>
             <div class="stamp"><%=stamp%>상</div>
         </figure> 
