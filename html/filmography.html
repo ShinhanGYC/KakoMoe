@@ -15,6 +15,7 @@
             display: flex;                  /*안에 들어있는 것들 가운데 정렬 할 때 필요함*/
             align-items: center;   
             flex-direction: column;        
+            background-color: #FFFAF0;  
         }
 
 
@@ -25,19 +26,23 @@
             gap: 20px;
             justify-content: center;
             flex-wrap: nowrap;
+            margin-top: 30px;
         }
         .actor_photo
         {
-            width: 500px;
-            height: 500px;
+            width: 300px;
+            height: 300px;
+            border-radius: 10px;                               /*둥근 모서리*/
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);       /*그림자 - 수평 0, 수직 6px , 흐림 12px*/
         }
         .actor_name
         {
             font-size: 25px;
             color: black;
             margin-top: 20px;
-            background-color: rgba(0, 0, 0, 0);
-            transform: translateX(80%);  
+            background: rgba(0, 0, 0, 0);
+            box-shadow: 0 0px 0px rgba(0, 0, 0, 0);                    /*그림자 없앰*/
+            transform: translateX(35%);                                  /*우승자 사진 하단 중간에 위치하게*/       
         }
 
 
@@ -46,23 +51,25 @@
         {
             width: 180px;
             height: 60px;
-
-            transform: translateX(30%);     /* 버튼들 필모 사진 중간에 위치하게 좌측으로 30% 이동 */
-
+            transform: translateX(30%);                                      /* 버튼들 필모 사진 중간에 위치하게 좌측으로 30% 이동 */
             font-size: 40px;
-            background-color: #FFDDBD;
+            background: linear-gradient(135deg, #FFDDBD, #FFB6C1);      /*그라데이션 (135도 방향, 첫번째 색상, 두번째 색상)*/
             color: #EB5C5C;
             border: none;
             border-radius: 10px;
             font-family: 'Bagel Fat One', sans-serif;
             text-align: center;
             margin-bottom: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);                    /*그림자 - 수평 0, 수직 4px , 흐림 10px*/
 
         }
         .filmo_debut, .filmo_daihyo, .filmo_newest 
         {
             width: 300px;
             height: 500px;
+            border-radius: 10px;                               /*둥근 모서리*/
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);       /*그림자 - 수평 0, 수직 6px , 흐림 12px*/
+            
         }
 
 
@@ -70,8 +77,8 @@
         .other_actor
         {
             font-size: 30px;
-            color: black;
-            margin-top: 20px;
+            color: #EB5C5C;
+            margin-top: 100px;
             background-color: rgba(0, 0, 0, 0);
             font-weight: bold;
             font-family: 'Noto Sans KR', sans-serif;
@@ -96,11 +103,15 @@
         {
             width: 300px;
             height: 300px;
+            border-radius: 10px;                               /*둥근 모서리*/
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);       /*그림자 - 수평 0, 수직 6px , 흐림 12px*/
         }
         .recommend_flimo_1, .recommend_flimo_2, .recommend_flimo_3
         {
             width: 300px;
             height: 500px;
+            border-radius: 10px;                               /*둥근 모서리*/
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);       /*그림자 - 수평 0, 수직 6px , 흐림 12px*/
         }
 
 
@@ -110,13 +121,22 @@
             width: 180px;
             height: 60px;           
             font-size: 40px;         
-            background-color: #FFDDBD;  
+            background: linear-gradient(135deg, #FFDDBD, #FFB6C1);      /*그라데이션 (135도 방향, 첫번째 색상, 두번째 색상)*/
             color: #EB5C5C;            
             border: none;            
             border-radius: 10px;  
             font-family: 'Bagel Fat One', sans-serif;
             margin-top: 40px;
             transform: translateX(400%);  
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);                    /*그림자 - 수평 0, 수직 4px , 흐림 10px*/
+            cursor: pointer;                                                /* 버튼에 마우스 올리면 마우스 포인터 손 모양으로 바뀌게*/
+            transition: all 0.3s ease;                                      /* 마우스 올렸을 때 부드럽게*/
+        }
+        /* 버튼에 마우스 올렸을 때 효과 */
+        input[type="submit"]:hover
+        {
+            background: linear-gradient(135deg, #FFB6C1, #FFDDBD);      /*그라데이션 반대로*/
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);                    /*그림자 강조*/
         }
     </style>
 
@@ -131,7 +151,7 @@
             <img class="actor_photo" src="./소금상 전처리/[소금][1991][사카구치켄타로].jpg" alt="">
             <figcaption class="actor_name">사카구치 켄타로</figcaption> 
             <br><br><br><br><br><br><br><br><br>
-            <p class="other_actor">이런 배우는 어떠세요?</p>
+            <p class="other_actor">이런 배우는 어떠세요? 🎬</p>
         </figure>   
         
 
@@ -180,9 +200,10 @@
     
     <script>
         // 다시하기 버튼 > start 화면
-        document.getElementById("retrybutton").onclick = function()
+        document.getElementById("retrybutton").onclick = function(event)
         {
-            window.location.href = "start.html";
+            event.preventDefault(); // 이게 있어야 새로고침 방지 
+            window.location.href = "start.html"; 
         }
     </script>
 </body>
