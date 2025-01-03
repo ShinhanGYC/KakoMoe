@@ -33,6 +33,9 @@ public class roundPlayServlet extends HttpServlet {
 		 HttpSession session = request.getSession();
 		
 		 ArrayList<ActorDTO> currentActorList =  (ArrayList) session.getAttribute("list");
+		 for (ActorDTO actorDTO : currentActorList) {
+			 System.out.println(actorDTO.getActorName());
+		 }
 		 int currentRound = 0;
 		 int totalRound = 0;
 		 if (session.getAttribute("currentRound") == null) {
@@ -74,20 +77,28 @@ public class roundPlayServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		HttpSession session = request.getSession();
 		ArrayList<ActorDTO> currentActorList =  (ArrayList) session.getAttribute("list");
-		int currentRound = Integer.parseInt((String) session.getAttribute("currentRound"));
-		int totalRound = Integer.parseInt((String) session.getAttribute("totalRound"));
+		int currentRound = (Integer) session.getAttribute("currentRound");
+		int totalRound = (Integer) session.getAttribute("totalRound");
 		if(currentActorList == null || currentActorList.size() <= 1) {
 			response.sendRedirect("roundPlayServlet");
 			
 		}
-		ActorDTO currnetRoundWinnerActorDTO = (ActorDTO) session.getAttribute("currentRoundWinnerActor");
+		String selectedActorId = request.getParameter("selectedActor");
 		ArrayList<ActorDTO> nextRoundActorList = (ArrayList) session.getAttribute("nextRoundActorList");
 	
-		if(currnetRoundWinnerActorDTO != null) {
+		if(selectedActorId != null) {
 			if(nextRoundActorList == null) {
 				nextRoundActorList = new ArrayList<>();
 			}
-			nextRoundActorList.add(currnetRoundWinnerActorDTO);
+			for (ActorDTO actorDTO : currentActorList) {
+				if(actorDTO.getActorID() == (Integer.parseInt(selectedActorId))) {
+					nextRoundActorList.add(actorDTO);
+					break;
+				}
+			}
+			for (ActorDTO actorDTO : nextRoundActorList) {
+				System.out.println("C:" + actorDTO.getActorName());
+			}
 			session.setAttribute("nextRoundActorList", nextRoundActorList);
 		}
 	
@@ -96,12 +107,13 @@ public class roundPlayServlet extends HttpServlet {
 			session.setAttribute("nextRoundActorList", null);
 	
 			session.setAttribute("currentRound", 1);
-			session.setAttribute("totalRound", Integer.parseInt((String)session.getAttribute("totalRound")) / 2);
+			session.setAttribute("totalRound", totalRound / 2);
 		}else {
 			currentActorList.remove(0);
 			currentActorList.remove(0);
 			session.setAttribute("currentRound", currentRound + 1);
 			session.setAttribute("list", currentActorList);
+			
 		
 		}
 		
