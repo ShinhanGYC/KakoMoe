@@ -30,90 +30,152 @@
 		[HTML Page - 스타일쉬트 구현 영역]
 		[외부 스타일쉬트 연결 : <>]
 		--------------------------------------------------------------------------%>
-	    <style>
-	        body 
-	        {
-	            text-align: center; 
-	            margin: 0;
-	            height: 100vh; 
-	            display: flex;                  /*안에 들어있는 것들 가운데 정렬 할 때 필요함*/
-	            flex-direction: column;         /*세로 배치*/
-	            justify-content: center;        /*중앙 배치*/
-	            align-items: center;            /* 가로방향 중앙*/
-	            font-family: 'Bagel Fat One', sans-serif;
-	        }
-	        h1 
-	        {
-	            font-size: 96px;
-	            font-weight: normal;            /*글씨체가 둥글둥글해서 너무 굵어서 노멀 해야 봐줄만함*/
-	        }
-	        .heart 
-	        {
-	            color: #EB5C5C;
-	        }
-	        .title 
-	        {
-	            color: #EF7979;
-	        }
-	
-	
-	        /* 버튼 */
-	        input[type="submit"] 
-	        {
-	            width: 250px;            
-	            height: 100px;            
-	            font-size: 70px;         
-	            background-color: #FFDDBD;  
-	            color: #EB5C5C;            
-	            border: none;            
-	            border-radius: 10px;  
-	            font-family: 'Bagel Fat One', sans-serif;
-	        }
-	
-	        
-	        /* 모달 */
-	        .modal 
-	        {
-	            display: none; 
-	            position: fixed;
-	            width: 100%;
-	            height: 100%;
-	            background-color: rgba(0,0,0,0.5); /* 뒷 배경 투명하게 */
-	            justify-content: center;
-	            align-items: center;
-	            font-family: 'Noto Sans KR', sans-serif;
-	        }
-	        .modal-content 
-	        {
-	            background-color: #fff;
-	            padding: 40px;
-	            border-radius: 10px;
-	            width: 80%;
-	            max-width: 500px;
-	            text-align: center;
-	        }
-	        .modal-button 
-	        {
-	            padding: 10px 20px;
-	            background-color: #EB5C5C;
-	            color: #fff;
-	            border: none;
-	            border-radius: 5px;
-	            font-size: 18px;
-	            font-family: 'Bagel Fat One', sans-serif;
-	        }
-	    </style>
+    <style>
+        body 
+        {
+            text-align: center;                         /*텍스트를 수평으로 중앙 정렬*/
+            margin: 0;                                  /*기본 여백 없애고, 바디 주변 여백 없게*/
+            height: 100vh; 
+            display: flex;                              /*안에 들어있는 것들 가운데 정렬 할 때 필요함*/
+            flex-direction: column;                     /*세로 방향 배치*/
+            justify-content: center;                    /*세로 방향 중앙 배치*/
+            align-items: center;                        /* 가로방향 중앙*/
+            font-family: 'Bagel Fat One', sans-serif;
+            background-color: #FFFAF0;  
+        }
+        h1 
+        {
+            font-size: 96px;
+            font-weight: normal;                                /*글씨체가 둥글둥글해서 너무 굵어서 노멀 해야 봐줄만함*/
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);      /*그림자 - 수평 2, 수직 2px , 흐림 5px*/
+        }
+        .heart 
+        {
+            color: #EB5C5C;
+        }
+        .title 
+        {
+            color: #EF7979;
+        }
+        .emoji-1, .emoji-2
+        {
+            color: #EB5C5C;
+            font-size: 50px;
+            position: absolute;
+            animation: emoji-swing 2s ease-in-out infinite; /*애니메이션 : 2초, 계속 흔들리게 */
+        }
+        /* 왼쪽 하트 */
+
+        /* 하트 이모지 애니메이션 */
+        @keyframes emoji-swing     /*좌우로 흔들리는 것 처럼*/
+        {
+            0% { transform: rotate(0deg); }
+            25% { transform: rotate(10deg); }
+            50% { transform: rotate(0deg); }
+            75% { transform: rotate(-10deg); }
+            100% { transform: rotate(0deg); }
+        }
+
+
+        /* 버튼 */
+        input[type="submit"] 
+        {
+            width: 250px;            
+            height: 100px;            
+            font-size: 70px;         
+            background: linear-gradient(135deg, #FFDDBD, #FFB6C1);      /*그라데이션 (135도 방향, 첫번째 색상, 두번째 색상)*/
+            color: #EB5C5C;                                               /*버튼 텍스트 색상*/        
+            border: none;                                                   /*버튼 테두리 없게*/
+            border-radius: 20px;                                            /*둥근 모서리*/
+            font-family: 'Bagel Fat One', sans-serif;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);                    /*그림자 - 수평 0, 수직 4px , 흐림 10px*/
+            cursor: pointer;                                                /* 버튼에 마우스 올리면 마우스 포인터 손 모양으로 바뀌게*/
+            transition: all 0.3s ease;                                      /* 마우스 올렸을 때 부드럽게*/
+        }
+        /* 버튼에 마우스 올렸을 때 효과 */
+        input[type="submit"]:hover
+        {
+            background: linear-gradient(135deg, #FFB6C1, #FFDDBD);      /*그라데이션 반대로*/
+            transform: scale(1.1);                                          /*버튼 크기 1.1배 키우기*/
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);                    /*그림자 강조*/
+        }
+
+        
+        /* 모달창 */
+        .modal 
+        {
+            display: none;                              /*모달창 처음에는 안보이게*/
+            position: fixed;                            /*위치 고정*/
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.6);        /*뒷 배경 투명하게*/
+            justify-content: center;                    /*세로 중앙*/
+            align-items: center;                        /*가로 중앙*/
+            font-family: 'Noto Sans KR', sans-serif;
+            animation: modal-open 0.5s ease-out;        /*애니메이션 : 0.5초, 천천히 끝나는 효과*/
+        }
+        /* 애니메이션 - 모달 창 등장 */
+        @keyframes modal-open
+        {
+            from 
+            {
+                opacity: 0;                     /*투명하게 시작*/
+                transform: translateY(-20px);   /*위쪽에서 등장하면서 20px위에 위치*/
+            }
+            to 
+            {
+                opacity: 1;                     /*불투명하게 끝*/
+                transform: translateY(0);       /*모달 원래 위치*/
+            }
+        }
+
+        /* 모달창 텍스트 */
+        .modal-content 
+        {
+            background-color: #fff;
+            padding: 40px;              /*모달창 내 여백*/
+            border-radius: 20px;        /*둥근 모서리*/          
+            width: 80%;                 /*너비*/
+            max-width: 500px;           /*최대 500px*/
+            text-align: center;         /*텍스트 중앙*/
+        }
+        
+        /* 모달창 버튼 */
+        .modal-button 
+        {
+            padding: 10px 20px;
+            background: linear-gradient(135deg, #FF7B7B, #FFD1D1);  /*그라데이션 (135도 방향, 첫번째 색상, 두번째 색상)*/
+            color: white;
+            border: none;
+            border-radius: 30px;                                        /*둥근 모서리*/ 
+            font-size: 18px;
+            font-family: 'Bagel Fat One', sans-serif;
+            cursor: pointer;
+            transition: all 0.3s ease;                                  /* 마우스 올렸을 때 부드럽게*/
+        }
+        /* 버튼에 마우스 올렸을 때 효과 */
+        .modal-button:hover 
+        {
+            transform: scale(1.1);                                          /*버튼 크기 1.1배 키우기*/
+            background: linear-gradient(135deg, #FFD1D1, #FF7B7B);      /*그라데이션 반대로*/
+        }
+    </style>
 	</head>
 	<body>
 	<%----------------------------------------------------------------------
 	[HTML Page - START]
 	--------------------------------------------------------------------------%>
 	    <!--시작화면-->
-	    <h1><span class="heart">심쿵!</span><br>
-	        <span class="title">이상형 뽑기 대작전</span>
+	    <h1>
+	     
+		    <!-- 심쿵! 바로 뒤에 이모지-1 -->
+	       &emsp;<span class="heart">심쿵!</span>
+	    <br>
+	    <!-- 이상형 뽑기 대작전 바로 뒤에 이모지-2 -->
+	    <span class="emoji-1">💘</span> &ensp; <span class="title">이상형 뽑기 대작전</span><span class="emoji-2">💘</span>
 	    </h1>
 	    <form>
-	        <input type="submit" value="Start" id="StartButton">
+	         &emsp;&emsp;&emsp;&emsp;&ensp;<input type="submit" value="Start" id="StartButton">
 	    </form>
 	
 	
