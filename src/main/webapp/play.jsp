@@ -149,14 +149,14 @@ if (actorList == null || actorList.isEmpty()) {
     <form id="roundForm" action="roundPlayServlet" method="post">
         <div class="gif-box">
             <figure class="gif-item">
-                <img src="http://localhost:8081/gif/<%= leftActor.getActorWorldcupPhoto() %>" alt="" data-actor-id="<%= leftActor.getActorID() %>">
+                <img src="http://localhost:8081/gif/<%= leftActor.getActorWorldcupPhoto() %>" onerror="this.onerror=null; this.src='no_image.jpg'"  alt="No Image" data-actor-id="<%= leftActor.getActorID() %>">
                 <figcaption><%= leftActor.getActorName() %></figcaption>
             </figure>    
 
             <div class="vs">VS</div>
 
             <figure class="gif-item">    
-                <img src="http://localhost:8081/gif/<%= rightActor.getActorWorldcupPhoto() %>" alt="" data-actor-id="<%= rightActor.getActorID() %>">
+                <img src="http://localhost:8081/gif/<%= rightActor.getActorWorldcupPhoto() %>"  onerror="this.onerror=null; this.src='no_image.jpg'"  alt="No Image" data-actor-id="<%= rightActor.getActorID() %>">
                 <figcaption><%= rightActor.getActorName() %></figcaption>
             </figure>
         </div>
