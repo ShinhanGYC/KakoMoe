@@ -28,9 +28,9 @@
 	    
 	    <%----------------------------------------------------------------------
 		[HTML Page - 스타일쉬트 구현 영역]
-		[외부 스타일쉬트 연결 : <css/start.css>]
+		[외부 스타일쉬트 연결 : <CSS/start.css>]
 		--------------------------------------------------------------------------%>
-  		<link rel="stylesheet" href="css/start.css">
+  		<link rel="stylesheet" href="CSS/start.css">
 		<style type="text/css"></style>
 	</head>
 	<body>
