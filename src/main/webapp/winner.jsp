@@ -1,4 +1,5 @@
 <%@page import="BeansHome.Actor.ActorDTO"%>
+<%@ page import="Config.ConfigMgr" %>
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -7,7 +8,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>winner</title>
+    <title>우승자 페이지</title>
     <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c&display=swap" rel="stylesheet"> <!--일본어 폰트(구글폰트)-->
     <link href="https://fonts.googleapis.com/css2?family=Bagel+Fat+One&display=swap" rel="stylesheet"> <!--게임화면 폰트(구글폰트)-->
     <script>
@@ -102,19 +103,9 @@
 <%
 ActorDTO winnerActor = (ActorDTO) session.getAttribute("winnerActor");  
 	String name = winnerActor.getActorName();
-	String stamp = null;
-	if (winnerActor.getFaceCode() == 1) {
-		stamp = "소금";
-	}
-	else if (winnerActor.getFaceCode() == 2) {
-		stamp = "간장";
-	}
-	else if (winnerActor.getFaceCode() == 3) {
-		stamp = "마요네즈";
-	}
-	else{
-		stamp = "된장";
-	}
+	String winnerFaceName = winnerActor.getFaceName();
+	String serverGif = ConfigMgr.getProperty("server.gif");
+
 %>
 
 <body>
@@ -122,9 +113,9 @@ ActorDTO winnerActor = (ActorDTO) session.getAttribute("winnerActor");
         <span class="watasi">わたしがあなたの</span><br>
  
         <figure>
-            <img src="http://localhost:8081/gif/<%= winnerActor.getActorWorldcupPhoto() %>" alt="gif"><br>
+            <img src="<%=serverGif + winnerActor.getActorWorldcupPhoto() %>" onerror="this.onerror=null; this.src='no_image.jpg'"  alt="gif"><br>
             <figcaption class="namae"><%=name%> </figcaption>
-            <div class="stamp"><%=stamp%>상</div>
+            <div class="stamp"><%=winnerFaceName%>상</div>
         </figure> 
 
         <span class="osi">おし</span>
