@@ -44,7 +44,7 @@
     <div class="error-container">
         <h1>잘못된 접근입니다.</h1>
         <p>죄송합니다. 요청하신 페이지를 처리할 수 없습니다.</p>
-        <a href="/KakoMoe/start.jsp">처음으로 돌아가기</a>
+        <a href="/">처음으로 돌아가기</a>
     </div>
 </body>
 </html>
