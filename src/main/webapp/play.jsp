@@ -3,6 +3,8 @@
     
 <%@ page import="BeansHome.Actor.ActorDTO" %>
 <%@ page import="java.util.List" %>
+<%@ page import="Config.ConfigMgr" %>
+
 <%
 // 현재 라운드와 상태 관리
 int totalRound = 0;
@@ -10,7 +12,7 @@ int currentRound  = 0;
 ActorDTO leftActor = null;
 ActorDTO rightActor = null;
 List<ActorDTO> actorList = null;
-
+String serverGif = ConfigMgr.getProperty("server.gif");
 
 //-------------------------------//
 if (session.getAttribute("totalRound") == null || session.getAttribute("currentRound") == null) {
@@ -149,14 +151,14 @@ if (actorList == null || actorList.isEmpty()) {
     <form id="roundForm" action="roundPlayServlet" method="post">
         <div class="gif-box">
             <figure class="gif-item">
-                <img src="http://localhost:8081/gif/<%= leftActor.getActorWorldcupPhoto() %>" onerror="this.onerror=null; this.src='no_image.jpg'"  alt="No Image" data-actor-id="<%= leftActor.getActorID() %>">
+                <img src="<%= serverGif + leftActor.getActorWorldcupPhoto() %>" onerror="this.onerror=null; this.src='no_image.jpg'"  alt="No Image" data-actor-id="<%= leftActor.getActorID() %>">
                 <figcaption><%= leftActor.getActorName() %></figcaption>
             </figure>    
 
             <div class="vs">VS</div>
 
             <figure class="gif-item">    
-                <img src="http://localhost:8081/gif/<%= rightActor.getActorWorldcupPhoto() %>"  onerror="this.onerror=null; this.src='no_image.jpg'"  alt="No Image" data-actor-id="<%= rightActor.getActorID() %>">
+                <img src="<%= serverGif + rightActor.getActorWorldcupPhoto() %>"  onerror="this.onerror=null; this.src='no_image.jpg'"  alt="No Image" data-actor-id="<%= rightActor.getActorID() %>">
                 <figcaption><%= rightActor.getActorName() %></figcaption>
             </figure>
         </div>
