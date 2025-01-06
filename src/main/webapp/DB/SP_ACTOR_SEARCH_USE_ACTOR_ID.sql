@@ -1,37 +1,26 @@
-SET SERVEROUTPUT ON;
-
-
-DECLARE
-    -- 커서에서 반환될 데이터를 받을 변수 선언
-    v_actor_id             NUMBER(10);
-    v_actor_name           NVARCHAR2(50);
-    v_face_name            NVARCHAR2(50);
-    v_actor_debut          NVARCHAR2(100);
-    v_actor_hit            NVARCHAR2(100);
-    v_actor_newest         NVARCHAR2(100);
-    v_actor_profile_photo  NVARCHAR2(255);
-    iCur                   SYS_REFCURSOR; -- 결과 반환용 커서
+create or replace PROCEDURE SP_ACTOR_SEARCH_USE_ACTOR_ID
+(
+    iActorID    IN  INT,            -- 배우 ID
+    iCur        OUT SYS_REFCURSOR   -- 결과 반환용 커서
+)
+IS
 BEGIN
-    -- 프로시저 호출
-    SP_ACTOR_SEARCH_USE_ACTOR_ID(
-        iActorID   => 1693, -- 조회하고자 하는 배우명을 입력     -- 조회하고자 하는 얼굴코드 입력 (0일 경우 모든 얼굴코드 조회)
-        iCur       => iCur     -- 결과를 받을 커서
-    );
-
-    -- 커서에서 데이터 가져오기
-    LOOP
-        FETCH iCur INTO v_actor_id, v_actor_name,  v_face_name, v_actor_debut, 
-                      v_actor_hit, v_actor_newest, v_actor_profile_photo;
-        EXIT WHEN iCur%NOTFOUND;
-
-        -- 커서 데이터 출력
-        DBMS_OUTPUT.PUT_LINE('actor_id: ' || v_actor_id || ', actor_name: ' || v_actor_name || 
-                             ', face_name: ' || v_face_name || 
-                             ', actor_debut: ' || v_actor_debut || ', actor_hit: ' || v_actor_hit || 
-                             ', actor_newest: ' || v_actor_newest || ', profile_photo: ' || v_actor_profile_photo);
-    END LOOP;
-
-    -- 커서 닫기
-    CLOSE iCur;
-END;
-/
+    -- 커서 열기 및 결과 반환
+    OPEN iCur FOR
+    SELECT 
+        a.actor_id, 
+        a.actor_name, 
+        f.face_name, 
+        a.actor_debut, 
+        a.actor_hit, 
+        a.actor_newest, 
+        p.actor_profile_photo
+    FROM 
+        ACTOR a 
+    LEFT JOIN 
+        FACE f ON a.face_code = f.face_code
+    LEFT JOIN 
+        PHOTO p ON a.actor_id = p.actor_id
+    WHERE 
+        a.actor_id = iActorID;   -- Actor ID 조건
+END SP_ACTOR_SEARCH_USE_ACTOR_ID;
