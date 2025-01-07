@@ -235,8 +235,6 @@
         /* 다시하기 버튼 */
         input[type="submit"] 
         {
-            position: fixed;
-            right: 20px;
             width: 180px;
             height: 60px;           
             font-size: 40px;         
@@ -245,16 +243,27 @@
             border: none;            
             border-radius: 10px;  
             font-family: 'Bagel Fat One', sans-serif;
+            margin-top: 40px;
+            transform: translateX(370%);  
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);                    /*그림자 - 수평 0, 수직 4px , 흐림 10px*/
             cursor: pointer;                                                /*버튼에 마우스 올리면 마우스 포인터 손 모양으로 바뀌게*/
             transition: all 0.3s ease;                                      /*마우스 올렸을 때 부드럽게*/
-            animation: bounce 2s infinite;                                  /*동동 뜨는 애니메이션*/
         }
         /* 버튼에 마우스 올렸을 때 효과 */
         input[type="submit"]:hover
         {
             background: linear-gradient(135deg, #FFB6C1, #FFDDBD);      /*그라데이션 반대로*/
             box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);                    /*그림자 강조*/
+        }
+        
+        /* 하트 이모지 */
+        .heart-shine
+        {
+            position: fixed;
+            right: 20px;
+            font-size: 40px;
+            transition: top 0.1s ease;          /* 부드럽게 이동 */
+            animation: bounce 2s infinite;      /*동동 뜨는 애니메이션*/  
         }
         /* 버튼 애니메이션 */
         @keyframes bounce 
@@ -268,7 +277,28 @@
                 transform: translateY(-15px); /* 위로 15px 이동 */
             }
         }
-
+        /* 하트 이모지2 */
+        .heart-shine2
+        {
+            position: fixed;
+            margin-top: 50px;
+            right: 10px;
+            font-size: 20px;
+            transition: top 0.1s ease;          /* 부드럽게 이동 */
+            animation: bounce 2s infinite;      /*동동 뜨는 애니메이션*/  
+        }
+        /* 버튼 애니메이션 */
+        @keyframes bounce 
+        {
+            0%, 100% 
+            {
+                transform: translateY(0); /* 원위치 */
+            }
+            50% 
+            {
+                transform: translateY(-15px); /* 위로 15px 이동 */
+            }
+        }
 
     </style>
 
@@ -334,6 +364,9 @@
             <div class="name_recommend_flimo_1">도쿄 사기꾼들</div>
         </div>
     </div>
+
+    <div class="heart-shine" id="hs">💖</div>
+    <div class="heart-shine2" id="hs2">💖</div>
     
     <!--다시하기 버튼-->
     <form>
@@ -348,11 +381,18 @@
             event.preventDefault(); // 이게 있어야 새로고침 방지 
             window.location.href = "start.html"; 
         }
-
-        // 다시하기 버튼 스크롤하면 따라오게
+        // 💖 스크롤하면 따라오게
         window.addEventListener('scroll', function () 
         {
-            const retryButton = document.getElementById('retrybutton');
+            const retryButton = document.getElementById('hs');
+            const scrollTop = window.scrollY;
+            retryButton.style.top = (scrollTop + 100) + 'px';
+        });
+
+        // 💖 스크롤하면 따라오게
+        window.addEventListener('scroll', function () 
+        {
+            const retryButton = document.getElementById('hs2');
             const scrollTop = window.scrollY;
             retryButton.style.top = (scrollTop + 100) + 'px';
         });
