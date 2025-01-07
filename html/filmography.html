@@ -10,11 +10,11 @@
     <style>
         body
         {
-            margin: 0;
+            margin: 0;                      /*기본 여백 없애고, 바디 주변 여백 없게*/
             padding: 20px;
             display: flex;                  /*안에 들어있는 것들 가운데 정렬 할 때 필요함*/
-            align-items: center;   
-            flex-direction: column;        
+            align-items: center;            /*가로방향 중앙*/
+            flex-direction: column;         /*세로 방향 배치*/
             background-color: #FFFAF0;  
         }
 
@@ -28,21 +28,30 @@
             flex-wrap: nowrap;
             margin-top: 30px;
         }
+        /* 우승자 사진 */
         .actor_photo
         {
             width: 300px;
             height: 300px;
-            border-radius: 10px;                               /*둥근 모서리*/
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);       /*그림자 - 수평 0, 수직 6px , 흐림 12px*/
+            border-radius: 10px;                                    /*둥근 모서리*/
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);            /*그림자 - 수평 0, 수직 6px , 흐림 12px*/
+            margin-top: 35%;
+            transition: border 0.3s ease, box-shadow 0.3s ease;     /*마우스 올렸을 때 부드럽게*/
         }
+        /* 사진 효과 */
+        .actor_photo:hover
+        {
+            box-shadow: 0 10px 50px rgba(237, 100, 100, 0.5); 
+        }
+        /* 우승자 이름 */
         .actor_name
         {
             font-size: 25px;
             color: black;
             margin-top: 20px;
             background: rgba(0, 0, 0, 0);
-            box-shadow: 0 0px 0px rgba(0, 0, 0, 0);                    /*그림자 없앰*/
-            transform: translateX(35%);                                  /*우승자 사진 하단 중간에 위치하게*/       
+            box-shadow: 0 0px 0px rgba(0, 0, 0, 0);     /*그림자 없앰*/
+            text-align: center; 
         }
 
 
@@ -51,7 +60,7 @@
         {
             width: 180px;
             height: 60px;
-            transform: translateX(30%);                                      /* 버튼들 필모 사진 중간에 위치하게 좌측으로 30% 이동 */
+            transform: translateX(30%);                                      /*버튼들 필모 사진 중간에 위치하게 좌측으로 30% 이동*/
             font-size: 40px;
             background: linear-gradient(135deg, #FFDDBD, #FFB6C1);      /*그라데이션 (135도 방향, 첫번째 색상, 두번째 색상)*/
             color: #EB5C5C;
@@ -63,13 +72,37 @@
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);                    /*그림자 - 수평 0, 수직 4px , 흐림 10px*/
 
         }
+        /* 우승자 필모 사진 */
         .filmo_debut, .filmo_daihyo, .filmo_newest 
         {
             width: 300px;
-            height: 500px;
-            border-radius: 10px;                               /*둥근 모서리*/
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);       /*그림자 - 수평 0, 수직 6px , 흐림 12px*/
-            
+            height: 400px;
+            border-radius: 10px;                                    /*둥근 모서리*/
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);            /*그림자 - 수평 0, 수직 6px , 흐림 12px*/
+            margin-top: 10%;
+            transition: border 0.3s ease, box-shadow 0.3s ease;     /*마우스 올렸을 때 부드럽게*/
+        }
+        /* 사진 효과 */
+        .filmo_debut:hover
+        {
+            box-shadow: 0 10px 50px rgba(237, 100, 100, 0.5); 
+        }
+        .filmo_daihyo:hover
+        {
+            box-shadow: 0 10px 50px rgba(237, 100, 100, 0.5); 
+        }
+        .filmo_newest:hover
+        {
+            box-shadow: 0 10px 50px rgba(237, 100, 100, 0.5); 
+        }
+        /* 우승자 필모 제목 */
+        .name_debut, .name_daihyo, .name_newest
+        {
+            font-size: 25px;
+            color: black;
+            margin-top: 20px;
+            text-align: center; 
+            font-family: 'Bagel Fat One', sans-serif;
         }
 
 
@@ -78,7 +111,7 @@
         {
             font-size: 30px;
             color: #EB5C5C;
-            margin-top: 100px;
+            margin-top: 10px;
             background-color: rgba(0, 0, 0, 0);
             font-weight: bold;
             font-family: 'Noto Sans KR', sans-serif;
@@ -89,8 +122,8 @@
         .recommend
         {
             display: flex;
-            gap: 100px;
-            margin-top: 40px;
+            gap: 300px;
+            margin-top: 10px;
         }
         .recommend_set
         {
@@ -99,19 +132,57 @@
             align-items: center;
             gap: 20px;
         }
+        /* 다른 배우 사진 */
         .recommend_actor_1, .recommend_actor_2, .recommend_actor_3
         {
             width: 300px;
             height: 300px;
-            border-radius: 10px;                               /*둥근 모서리*/
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);       /*그림자 - 수평 0, 수직 6px , 흐림 12px*/
+            border-radius: 10px;                                  /*둥근 모서리*/
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);          /*그림자 - 수평 0, 수직 6px , 흐림 12px*/
+            transition: border 0.3s ease, box-shadow 0.3s ease;   /*마우스 올렸을 때 부드럽게*/
         }
+        /* 사진 효과 */
+        .recommend_actor_1:hover
+        {
+            box-shadow: 0 10px 50px rgba(237, 100, 100, 0.5); 
+        }
+        .recommend_actor_2:hover
+        {
+            box-shadow: 0 10px 50px rgba(237, 100, 100, 0.5); 
+        }.recommend_actor_3:hover
+        {
+            box-shadow: 0 10px 50px rgba(237, 100, 100, 0.5); 
+        }
+        /* 다른 배우 이름, 다른 배우 필모 이름 */
+        .name_recommend_actor_1, .name_recommend_actor_2, .name_recommend_actor_3, .name_recommend_flimo_1, .name_recommend_flimo_2, .name_recommend_flimo_3
+        {
+            font-size: 25px;
+            color: black;
+            margin-top: 0px;
+            text-align: center; 
+            font-family: 'Bagel Fat One', sans-serif;
+        }
+        /* 다른 배우 필모 사진 */
         .recommend_flimo_1, .recommend_flimo_2, .recommend_flimo_3
         {
             width: 300px;
-            height: 500px;
-            border-radius: 10px;                               /*둥근 모서리*/
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);       /*그림자 - 수평 0, 수직 6px , 흐림 12px*/
+            height: 400px;
+            border-radius: 10px;                                    /*둥근 모서리*/
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);            /*그림자 - 수평 0, 수직 6px , 흐림 12px*/
+            transition: border 0.3s ease, box-shadow 0.3s ease;     /*마우스 올렸을 때 부드럽게*/
+        }
+        /* 사진 효과 */
+        .recommend_flimo_1:hover
+        {
+            box-shadow: 0 10px 50px rgba(237, 100, 100, 0.5); 
+        }
+        .recommend_flimo_2:hover
+        {
+            box-shadow: 0 10px 50px rgba(237, 100, 100, 0.5); 
+        }
+        .recommend_flimo_3:hover
+        {
+            box-shadow: 0 10px 50px rgba(237, 100, 100, 0.5); 
         }
 
 
@@ -127,10 +198,10 @@
             border-radius: 10px;  
             font-family: 'Bagel Fat One', sans-serif;
             margin-top: 40px;
-            transform: translateX(400%);  
+            transform: translateX(370%);  
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);                    /*그림자 - 수평 0, 수직 4px , 흐림 10px*/
-            cursor: pointer;                                                /* 버튼에 마우스 올리면 마우스 포인터 손 모양으로 바뀌게*/
-            transition: all 0.3s ease;                                      /* 마우스 올렸을 때 부드럽게*/
+            cursor: pointer;                                                /*버튼에 마우스 올리면 마우스 포인터 손 모양으로 바뀌게*/
+            transition: all 0.3s ease;                                      /*마우스 올렸을 때 부드럽게*/
         }
         /* 버튼에 마우스 올렸을 때 효과 */
         input[type="submit"]:hover
@@ -158,16 +229,19 @@
         <figure>
             <figcaption>데뷔작</figcaption>
             <img class="filmo_debut" src="./필모.jpg" alt="">
+            <div class="name_debut">이별, 그 뒤에도</div>
         </figure>   
 
         <figure>
             <figcaption>대표작</figcaption>
             <img class="filmo_daihyo" src="./필모.jpg" alt="">
+            <div class="name_daihyo">이별, 그 뒤에도</div>
         </figure>  
 
         <figure>
             <figcaption>최신작</figcaption>
             <img class="filmo_newest"  src="./필모.jpg" alt="">
+            <div class="name_newest">이별, 그 뒤에도</div>
         </figure>  
 
         
@@ -178,19 +252,25 @@
         <div class="recommend_set">
 
             <img class="recommend_actor_1" src="./소금상 전처리/[소금][1982][아야노고].jpg" alt="">
+            <div class="name_recommend_actor_1">아야노 고</div>
             <img class="recommend_flimo_1" src="./필모2.jpg" alt="">
+            <div class="name_recommend_flimo_1">도쿄 사기꾼들</div>
         </div>
 
         <div class="recommend_set">
 
             <img class="recommend_actor_2" src="./소금상 전처리/[소금][1982][아야노고].jpg" alt="">
+            <div class="name_recommend_actor_2">아야노 고</div>
             <img class="recommend_flimo_2" src="./필모2.jpg" alt="">
+            <div class="name_recommend_flimo_1">도쿄 사기꾼들</div>
         </div>
 
         <div class="recommend_set">
 
             <img class="recommend_actor_3" src="./소금상 전처리/[소금][1982][아야노고].jpg" alt="">
+            <div class="name_recommend_actor_3">아야노 고</div>
             <img class="recommend_flimo_3" src="./필모2.jpg" alt="">
+            <div class="name_recommend_flimo_1">도쿄 사기꾼들</div>
         </div>
     </div>
     
