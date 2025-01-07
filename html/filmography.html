@@ -46,13 +46,28 @@
         /* 우승자 이름 */
         .actor_name
         {
+            border: 2px solid #FFDDBD;                      /*테두리*/
+            border-radius: 10px;                              /*테두리 둥글게*/
+            height: 70px;
+            width: 300px;
             font-size: 25px;
             color: black;
             margin-top: 20px;
-            background: rgba(0, 0, 0, 0);
-            box-shadow: 0 0px 0px rgba(0, 0, 0, 0);     /*그림자 없앰*/
-            text-align: center; 
-        }
+            background: #FFF5E1; 
+            box-shadow: 0 0px 0px rgba(0, 0, 0, 0);
+            text-align: center;
+            font-weight: bold;
+            font-family: 'Noto Sans KR', sans-serif;
+            word-wrap: break-word;                          /*긴 단어 줄 바꿈*/
+            word-break: break-word;                         /*단어를 강제로 끊어서 줄 바꿈*/
+            white-space: normal;                            /*기본 줄 바꿈 허용*/            
+            
+            display: flex;
+            align-items: center;                            /*세로 중앙 정렬*/
+            justify-content: center;                        /*수평 중앙 정렬*/
+            padding: 0; 
+            margin-left: -90px;                             /*텍스트 박스를 왼쪽으로 밀기*/
+        }       
 
 
         /* 우승자 필모 */
@@ -98,11 +113,26 @@
         /* 우승자 필모 제목 */
         .name_debut, .name_daihyo, .name_newest
         {
+            border: 2px solid #FFDDBD;                      /*테두리*/
+            border-radius: 10px;                              /*테두리 둥글게*/
+            height: 70px;
+            width: 300px;
             font-size: 25px;
             color: black;
             margin-top: 20px;
-            text-align: center; 
-            font-family: 'Bagel Fat One', sans-serif;
+            background: #FFF5E1; 
+            box-shadow: 0 0px 0px rgba(0, 0, 0, 0);
+            text-align: center;
+            font-weight: bold;
+            font-family: 'Noto Sans KR', sans-serif;
+            word-wrap: break-word;                          /*긴 단어 줄 바꿈*/
+            word-break: break-word;                         /*단어를 강제로 끊어서 줄 바꿈*/
+            white-space: normal;                            /*기본 줄 바꿈 허용*/            
+            
+            display: flex;
+            align-items: center;                            /*세로 중앙 정렬*/
+            justify-content: center;                        /*수평 중앙 정렬*/
+            padding: 0; 
         }
 
 
@@ -122,7 +152,7 @@
         .recommend
         {
             display: flex;
-            gap: 300px;
+            gap: 310px;
             margin-top: 10px;
         }
         .recommend_set
@@ -156,11 +186,27 @@
         /* 다른 배우 이름, 다른 배우 필모 이름 */
         .name_recommend_actor_1, .name_recommend_actor_2, .name_recommend_actor_3, .name_recommend_flimo_1, .name_recommend_flimo_2, .name_recommend_flimo_3
         {
+            border: 2px solid #FFDDBD;                      /*테두리*/
+            border-radius: 10px;                              /*테두리 둥글게*/
+            height: 70px;
+            width: 300px;
             font-size: 25px;
             color: black;
-            margin-top: 0px;
-            text-align: center; 
-            font-family: 'Bagel Fat One', sans-serif;
+            margin-top: 20px;
+            background: #FFF5E1; 
+            box-shadow: 0 0px 0px rgba(0, 0, 0, 0);
+            text-align: center;
+            font-weight: bold;
+            font-family: 'Noto Sans KR', sans-serif;
+            word-wrap: break-word;                          /*긴 단어 줄 바꿈*/
+            word-break: break-word;                         /*단어를 강제로 끊어서 줄 바꿈*/
+            white-space: normal;                            /*기본 줄 바꿈 허용*/            
+            
+            display: flex;
+            align-items: center;                            /*세로 중앙 정렬*/
+            justify-content: center;                        /*수평 중앙 정렬*/
+            padding: 0; 
+            margin-top: 0;
         }
         /* 다른 배우 필모 사진 */
         .recommend_flimo_1, .recommend_flimo_2, .recommend_flimo_3
@@ -189,6 +235,8 @@
         /* 다시하기 버튼 */
         input[type="submit"] 
         {
+            position: fixed;
+            right: 20px;
             width: 180px;
             height: 60px;           
             font-size: 40px;         
@@ -197,11 +245,10 @@
             border: none;            
             border-radius: 10px;  
             font-family: 'Bagel Fat One', sans-serif;
-            margin-top: 40px;
-            transform: translateX(370%);  
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);                    /*그림자 - 수평 0, 수직 4px , 흐림 10px*/
             cursor: pointer;                                                /*버튼에 마우스 올리면 마우스 포인터 손 모양으로 바뀌게*/
             transition: all 0.3s ease;                                      /*마우스 올렸을 때 부드럽게*/
+            animation: bounce 2s infinite;                                  /*동동 뜨는 애니메이션*/
         }
         /* 버튼에 마우스 올렸을 때 효과 */
         input[type="submit"]:hover
@@ -209,6 +256,20 @@
             background: linear-gradient(135deg, #FFB6C1, #FFDDBD);      /*그라데이션 반대로*/
             box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);                    /*그림자 강조*/
         }
+        /* 버튼 애니메이션 */
+        @keyframes bounce 
+        {
+            0%, 100% 
+            {
+                transform: translateY(0); /* 원위치 */
+            }
+            50% 
+            {
+                transform: translateY(-15px); /* 위로 15px 이동 */
+            }
+        }
+
+
     </style>
 
 </head>
@@ -241,7 +302,7 @@
         <figure>
             <figcaption>최신작</figcaption>
             <img class="filmo_newest"  src="./필모.jpg" alt="">
-            <div class="name_newest">이별, 그 뒤에도</div>
+            <div class="name_newest">이별, 그 뒤에도ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ</div>
         </figure>  
 
         
@@ -274,10 +335,12 @@
         </div>
     </div>
     
+    <!--다시하기 버튼-->
     <form>
         <input type="submit" value="다시하기" id="retrybutton">
     </form>
     
+
     <script>
         // 다시하기 버튼 > start 화면
         document.getElementById("retrybutton").onclick = function(event)
@@ -285,6 +348,14 @@
             event.preventDefault(); // 이게 있어야 새로고침 방지 
             window.location.href = "start.html"; 
         }
+
+        // 다시하기 버튼 스크롤하면 따라오게
+        window.addEventListener('scroll', function () 
+        {
+            const retryButton = document.getElementById('retrybutton');
+            const scrollTop = window.scrollY;
+            retryButton.style.top = (scrollTop + 100) + 'px';
+        });
     </script>
 </body>
 </html>
