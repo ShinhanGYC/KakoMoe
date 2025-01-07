@@ -47,7 +47,7 @@ public class ServletRoundInit extends HttpServlet {
  	// —————————————————————————————————————————————————————————————————————————————————————
  	
  	// —————————————————————————————————————————————————————————————————————————————————————
-     // 생성자 관리 - 필수영역(인스턴스함수)
+    // 생성자 관리 - 필수영역(인스턴스함수)
  	// —————————————————————————————————————————————————————————————————————————————————————
  	/***********************************************************************
  	 * ServletRoundInit()		: 생성자
@@ -111,8 +111,8 @@ public class ServletRoundInit extends HttpServlet {
 		// -----------------------------------------------------------------------------
 		// request parameter : round 파라미터 파싱 (String -> int) 
 		// -----------------------------------------------------------------------------
-        String requestURI = null;		// round 값 파싱 : (32강 / 16강) 변수
-        String roundStr	  = null;		// 숫자 값 파싱   : (32 / 16) 변수
+		String requestURI = null;		// round 값 파싱 : (32강 / 16강) 변수
+		String roundStr	  = null;		// 숫자 값 파싱   : (32 / 16) 변수
 		int round 	      = 0;			// String -> Integer 형 변환 변수
 		
 		ActorDAO ActorDAO 	= null;		// 배우 DAO Bean 객체(Database Access Object)
@@ -140,7 +140,7 @@ public class ServletRoundInit extends HttpServlet {
 			ActorDAO = new ActorDAO();		
 			ActorDTOList = new ArrayList<>();
 			
-	    	// -----------------------------------------------------------------------------
+			// -----------------------------------------------------------------------------
 			// DB에서 배우 데이터 랜덤으로 가져오기 (16개 or 32개)
 			// -----------------------------------------------------------------------------
 			if (ActorDAO.takeRandomActorForWorldcup(round) == true)
@@ -151,9 +151,9 @@ public class ServletRoundInit extends HttpServlet {
 				}
 				
 				if (bContinue == true) {
-			    	// -----------------------------------------------------------------------------
-					// 가져온 배우 정보 배우 리스트 DTO에 삽입하기
-					// -----------------------------------------------------------------------------
+				// -----------------------------------------------------------------------------
+				// 가져온 배우 정보 배우 리스트 DTO에 삽입하기
+				// -----------------------------------------------------------------------------
 					while(ActorDAO.DBMgr.Rs.next() == true) {
 						ActorDTOList.add(new ActorDTO());
 						ActorDTOList.get(ActorDTOList.size()-1).setActorID(ActorDAO.DBMgr.Rs.getInt("actor_id"));
@@ -189,16 +189,16 @@ public class ServletRoundInit extends HttpServlet {
 			// 세션 설정
 			// -----------------------------------------------------------------
 			session = request.getSession();			   		 // 세션값 가져오기
-	        session.setAttribute("totalRound", round); 		 // totalRound 파라미터 설정   	 | (16 / 32)
-	        session.setAttribute("currentRound", 1);   		 // currentRound 파라미터 설정 	 | 1
-	        session.setAttribute("actorList", ActorDTOList); // actorList 파라미터 설정 	 | ActorDTOList 객체 
+			session.setAttribute("totalRound", round); 		 // totalRound 파라미터 설정   	 | (16 / 32)
+			session.setAttribute("currentRound", 1);   		 // currentRound 파라미터 설정 	 | 1
+			session.setAttribute("actorList", ActorDTOList); // actorList 파라미터 설정 	 | ActorDTOList 객체 
 	        
 	      
 			// -----------------------------------------------------------------	
 			// 다음 서블릿에 데이터 전달 및 이동하기 
 			// -----------------------------------------------------------------
-	        dispatcher = request.getRequestDispatcher("ServletRoundPlay");
-	        dispatcher.forward(request, response);
+			dispatcher = request.getRequestDispatcher("ServletRoundPlay");
+			dispatcher.forward(request, response);
 	        
 		} 
 		catch (Exception e) {
