@@ -148,7 +148,7 @@ if (actorList == null || actorList.isEmpty()) {
     </h1>
 
     <!--움짤-->
-    <form id="roundForm" action="roundPlayServlet" method="post">
+    <form id="roundForm" action="ServletRoundPlay" method="post">
         <div class="gif-box">
             <figure class="gif-item">
                 <img src="<%= serverGif + leftActor.getActorWorldcupPhoto() %>" onerror="this.onerror=null; this.src='no_image.jpg'"  alt="No Image" data-actor-id="<%= leftActor.getActorID() %>">

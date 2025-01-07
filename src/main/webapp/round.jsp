@@ -41,9 +41,9 @@
 	        <span class="round">라운드를 선택하세요</span>
 	    </h1>
 	    <%----------------------------------------------------------------------
-	    	Action : roundInitServlet | value : 32강, 16강 | parameter : round
+			Action : ServletRoundInit.java | value : 32강, 16강 | parameter : round
 	    --------------------------------------------------------------------------%> 
-	    <form action="roundInitServlet" method="get" enctype="multipart/form-data">
+	    <form action="ServletRoundInit" method="get" enctype="multipart/form-data">
 	        <input type="submit" value="32강"  name = "round" style="margin-right: 100px;">
 	        <input type="submit" value="16강"  name = "round">
 	    </form>
