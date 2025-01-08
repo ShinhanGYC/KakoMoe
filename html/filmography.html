@@ -48,9 +48,9 @@
         {
             border: 2px solid #FFDDBD;                      /*테두리*/
             border-radius: 10px;                              /*테두리 둥글게*/
-            height: 70px;
+           
             width: 300px;
-            font-size: 25px;
+            font-size: 20px;
             color: black;
             margin-top: 20px;
             background: #FFF5E1; 
@@ -61,12 +61,13 @@
             word-wrap: break-word;                          /*긴 단어 줄 바꿈*/
             word-break: break-word;                         /*단어를 강제로 끊어서 줄 바꿈*/
             white-space: normal;                            /*기본 줄 바꿈 허용*/            
-            
+   
             display: flex;
             align-items: center;                            /*세로 중앙 정렬*/
             justify-content: center;                        /*수평 중앙 정렬*/
-            padding: 0; 
             margin-left: -90px;                             /*텍스트 박스를 왼쪽으로 밀기*/
+            padding: 20px;
+            box-sizing: border-box;                         /*박스 사이즈 유지*/
         }       
 
 
@@ -115,9 +116,9 @@
         {
             border: 2px solid #FFDDBD;                      /*테두리*/
             border-radius: 10px;                              /*테두리 둥글게*/
-            height: 70px;
+           
             width: 300px;
-            font-size: 25px;
+            font-size: 20px;
             color: black;
             margin-top: 20px;
             background: #FFF5E1; 
@@ -128,11 +129,13 @@
             word-wrap: break-word;                          /*긴 단어 줄 바꿈*/
             word-break: break-word;                         /*단어를 강제로 끊어서 줄 바꿈*/
             white-space: normal;                            /*기본 줄 바꿈 허용*/            
-            
+   
             display: flex;
             align-items: center;                            /*세로 중앙 정렬*/
             justify-content: center;                        /*수평 중앙 정렬*/
-            padding: 0; 
+            
+            padding: 20px;
+            box-sizing: border-box;                         /*박스 사이즈 유지*/
         }
 
 
@@ -141,7 +144,7 @@
         {
             font-size: 30px;
             color: #EB5C5C;
-            margin-top: 10px;
+            margin-top: 30px;
             background-color: rgba(0, 0, 0, 0);
             font-weight: bold;
             font-family: 'Noto Sans KR', sans-serif;
@@ -188,9 +191,9 @@
         {
             border: 2px solid #FFDDBD;                      /*테두리*/
             border-radius: 10px;                              /*테두리 둥글게*/
-            height: 70px;
+            
             width: 300px;
-            font-size: 25px;
+            font-size: 20px;
             color: black;
             margin-top: 20px;
             background: #FFF5E1; 
@@ -205,8 +208,9 @@
             display: flex;
             align-items: center;                            /*세로 중앙 정렬*/
             justify-content: center;                        /*수평 중앙 정렬*/
-            padding: 0; 
             margin-top: 0;
+            padding: 20px;
+            box-sizing: border-box;                         /*박스 사이즈 유지*/
         }
         /* 다른 배우 필모 사진 */
         .recommend_flimo_1, .recommend_flimo_2, .recommend_flimo_3
@@ -243,8 +247,8 @@
             border: none;            
             border-radius: 10px;  
             font-family: 'Bagel Fat One', sans-serif;
-            margin-top: 40px;
-            transform: translateX(370%);  
+            margin-top: 50px;
+            transform: translateX(375%);  
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);                    /*그림자 - 수평 0, 수직 4px , 흐림 10px*/
             cursor: pointer;                                                /*버튼에 마우스 올리면 마우스 포인터 손 모양으로 바뀌게*/
             transition: all 0.3s ease;                                      /*마우스 올렸을 때 부드럽게*/
@@ -332,7 +336,7 @@
         <figure>
             <figcaption>최신작</figcaption>
             <img class="filmo_newest"  src="./필모.jpg" alt="">
-            <div class="name_newest">이별, 그 뒤에도ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ</div>
+            <div class="name_newest">이별, 그 뒤에도ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ</div>
         </figure>  
 
         
@@ -361,7 +365,7 @@
             <img class="recommend_actor_3" src="./소금상 전처리/[소금][1982][아야노고].jpg" alt="">
             <div class="name_recommend_actor_3">아야노 고</div>
             <img class="recommend_flimo_3" src="./필모2.jpg" alt="">
-            <div class="name_recommend_flimo_1">도쿄 사기꾼들</div>
+            <div class="name_recommend_flimo_1">도쿄 사기꾼들ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ</div>
         </div>
     </div>
 
@@ -381,20 +385,43 @@
             event.preventDefault(); // 이게 있어야 새로고침 방지 
             window.location.href = "start.html"; 
         }
+        
         // 💖 스크롤하면 따라오게
         window.addEventListener('scroll', function () 
         {
-            const retryButton = document.getElementById('hs');
-            const scrollTop = window.scrollY;
-            retryButton.style.top = (scrollTop + 100) + 'px';
+            const retryButton = document.getElementById('hs'); 
+            const scrollTop = window.scrollY; 
+            const windowHeight = window.innerHeight; 
+            const elementHeight = retryButton.offsetHeight; 
+        
+            let newTop = scrollTop + 20; 
+
+            // 화면 하단을 넘지 않도록 설정
+            if (newTop + elementHeight > windowHeight) 
+            {
+                newTop = windowHeight - elementHeight; 
+            }
+
+            retryButton.style.top = newTop + 'px'; 
         });
 
         // 💖 스크롤하면 따라오게
         window.addEventListener('scroll', function () 
         {
-            const retryButton = document.getElementById('hs2');
-            const scrollTop = window.scrollY;
-            retryButton.style.top = (scrollTop + 100) + 'px';
+            const retryButton = document.getElementById('hs2'); 
+            const scrollTop = window.scrollY; // 현재 스크롤 위치
+            const windowHeight = window.innerHeight; // 화면 높이
+            const elementHeight = retryButton.offsetHeight; // 요소 높이
+        
+            let newTop = scrollTop; 
+
+            // 화면 하단을 넘지 않도록 설정
+            if (newTop + elementHeight > windowHeight) 
+            {
+                newTop = windowHeight - elementHeight; 
+            }
+
+            retryButton.style.top = newTop + 'px'; 
         });
     </script>
 </body>
