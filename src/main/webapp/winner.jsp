@@ -17,10 +17,11 @@
     <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Bagel+Fat+One&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="CSS/winner.css">
+    <style> <style type="text/css"> </style>
     <script>
         setTimeout(function() {
             window.location.href = 'recommend.jsp';
-        }, 300000);
+        }, 3000);
     </script>
 </head>
 <%
