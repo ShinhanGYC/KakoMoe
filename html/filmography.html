@@ -35,7 +35,7 @@
             height: 300px;
             border-radius: 10px;                                    /*둥근 모서리*/
             box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);            /*그림자 - 수평 0, 수직 6px , 흐림 12px*/
-            margin-top: 35%;
+            margin-top: 10%;
             transition: border 0.3s ease, box-shadow 0.3s ease;     /*마우스 올렸을 때 부드럽게*/
         }
         /* 사진 효과 */
@@ -65,7 +65,7 @@
             display: flex;
             align-items: center;                            /*세로 중앙 정렬*/
             justify-content: center;                        /*수평 중앙 정렬*/
-            margin-left: -90px;                             /*텍스트 박스를 왼쪽으로 밀기*/
+            
             padding: 20px;
             box-sizing: border-box;                         /*박스 사이즈 유지*/
         }       
@@ -87,6 +87,12 @@
             margin-bottom: 20px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);                    /*그림자 - 수평 0, 수직 4px , 흐림 10px*/
 
+        }
+        .winner-tag
+        {
+            color: transparent;
+            background: transparent;      
+            box-shadow: none;                    
         }
         /* 우승자 필모 사진 */
         .filmo_debut, .filmo_daihyo, .filmo_newest 
@@ -142,9 +148,12 @@
         /* 이런 배우는 어떠세요 */
         .other_actor
         {
+            width: max-content;
+            height: max-content;
             font-size: 30px;
             color: #EB5C5C;
-            margin-top: 30px;
+            margin-top: 90px;
+            margin-right: 1200px;
             background-color: rgba(0, 0, 0, 0);
             font-weight: bold;
             font-family: 'Noto Sans KR', sans-serif;
@@ -173,6 +182,7 @@
             border-radius: 10px;                                  /*둥근 모서리*/
             box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);          /*그림자 - 수평 0, 수직 6px , 흐림 12px*/
             transition: border 0.3s ease, box-shadow 0.3s ease;   /*마우스 올렸을 때 부드럽게*/
+            margin-top: 100px;
         }
         /* 사진 효과 */
         .recommend_actor_1:hover
@@ -314,12 +324,10 @@
     <div class="filmo">
 
         <figure>
+            <figcaption class="winner-tag">우승자</figcaption>
             <img class="actor_photo" src="./소금상 전처리/[소금][1991][사카구치켄타로].jpg" alt="">
-            <figcaption class="actor_name">사카구치 켄타로</figcaption> 
-            <br><br><br><br><br><br><br><br><br>
-            <p class="other_actor">이런 배우는 어떠세요? 🎬</p>
+            <div class="actor_name">사카구치 켄타로</div> 
         </figure>   
-        
 
         <figure>
             <figcaption>데뷔작</figcaption>
@@ -343,6 +351,8 @@
     </div>
 
     <!--이런 배우는 어떠세요-->
+    <div class="other_actor">이런 배우는 어떠세요? 🎬</div>
+
     <div class="recommend">
         <div class="recommend_set">
 
