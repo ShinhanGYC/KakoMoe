@@ -1,126 +1,88 @@
-<%@page import="BeansHome.Actor.ActorDTO"%>
-<%@ page import="Config.ConfigMgr" %>
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
+<%@page import="java.awt.image.BufferedImage" %>
+<%@page import="java.io.File" %>
+<%@page import="javax.imageio.ImageIO" %>
+<%@page import="BeansHome.Actor.ActorDTO" %>
+<%@page import="Config.ConfigMgr" %>
+<%@ page import="java.net.URL" %>
+<%@ page import="org.jsoup.Jsoup"%>
+<%@ page import="org.jsoup.nodes.Document"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>우승자 페이지</title>
-    <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c&display=swap" rel="stylesheet"> <!--일본어 폰트(구글폰트)-->
-    <link href="https://fonts.googleapis.com/css2?family=Bagel+Fat+One&display=swap" rel="stylesheet"> <!--게임화면 폰트(구글폰트)-->
+    <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bagel+Fat+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="CSS/winner.css">
     <script>
-    
-    // 4초 후 recommend.jsp로 리다이렉트
-    setTimeout(function() {
-        window.location.href = 'recommend.jsp';
-    }, 4000);
-</script>
-    <style>
-       body 
-        {
-            text-align: center; 
-            margin: 0;
-            height: 100vh; 
-            display: flex;                  /*안에 들어있는 것들 가운데 정렬 할 때 필요함*/
-            flex-direction: column;         /*세로 배치*/
-            justify-content: center;        /*중앙 배치*/
-            align-items: center;            /* 가로방향 중앙*/
-            font-family: 'M PLUS Rounded 1c', sans-serif;
-        }
-       h1
-        {
-            writing-mode: vertical-rl;      /*세로 글씨*/
-            font-size: 80px;
-            font-weight: normal;            
-
-        }
-
-
-        /*わたしがあなたの*/
-        .watasi
-        {
-            color: #EB5C5C;
-        }
-        
-
-        /*움짤 및 이름*/
-        figure
-        {
-            display: flex;
-            align-items: center;
-            margin: 0;
-        }
-        .namae
-        {
-            writing-mode: horizontal-tb;    /*가로 글씨*/
-            font-size: 30px;
-            color: black;
-            margin-top: 20px;
-            font-family: 'Bagel Fat One', sans-serif;
-        }
-        img
-        {
-            position: relative;
-        }
-        .stamp 
-        {
-            position: absolute;
-            top: 55%; 
-            left: 67%; 
-            
-            display: flex; 
-            justify-content: center; 
-            align-items: center; 
-
-            writing-mode: horizontal-tb;    /*가로 글씨*/
-            font-size: 20px; 
-            color: #E10909; 
-            font-family: 'Bagel Fat One', sans-serif; 
-
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            background-color: rgba(0, 0, 0, 0);
-            border: 5px solid #E10909;
-        }
-
-        /*おしです*/
-        .osi
-        {
-            font-size: 128px;           /*오시는 크고 굵게*/
-            font-weight: bold;
-            color: #EB5C5C;
-        }
-        .desu
-        {
-            color: #EB5C5C;
-        }
-    </style>
+        setTimeout(function() {
+            window.location.href = 'recommend.jsp';
+        }, 30000);
+    </script>
 </head>
 <%
-ActorDTO winnerActor = (ActorDTO) session.getAttribute("winnerActor");  
-	String name = winnerActor.getActorName();
-	String winnerFaceName = winnerActor.getFaceName();
-	String serverGif = ConfigMgr.getProperty("server.gif");
+    ActorDTO winnerActor = (ActorDTO) session.getAttribute("winnerActor");  
+    String name = winnerActor.getActorName();
+    String winnerFaceName = winnerActor.getFaceName();
+    String serverGif = ConfigMgr.getProperty("server.gif");
+    String imageUrl = serverGif + winnerActor.getActorWorldcupPhoto();
 
-%>
+    int imageWidth = 0;
+    int imageHeight = 0;
+    int stampTop = 0;
+    int stampLeft = 0;
+    System.out.println(imageUrl);
+    try {
+
+    	 Document document = Jsoup.connect(imageUrl).get();
+    	 String title = document.title();
+         System.out.println("Page Title: " + title);
+         
+     
+     } catch (Exception e) {
+         e.printStackTrace();
+     }
+
+ %>
 
 <body>
     <h1>
         <span class="watasi">わたしがあなたの</span><br>
  
-        <figure>
-            <img src="<%=serverGif + winnerActor.getActorWorldcupPhoto() %>" onerror="this.onerror=null; this.src='no_image.jpg'"  alt="gif"><br>
+        <figure style="position: relative;">
+            <!-- 이미지 -->
+            <img src="<%=serverGif + winnerActor.getActorWorldcupPhoto() %>" 
+                 onerror="this.onerror=null; this.src='no_image.jpg'" 
+                 alt="gif" 
+                 style="max-width: 100%; height: auto; border-radius: 10px; box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);">
             <figcaption class="namae"><%=name%> </figcaption>
-            <div class="stamp"><%=winnerFaceName%>상</div>
+            
+            <!-- 스탬프 -->
+            <div class="stamp" 
+                 style="position: absolute; 
+                        top: <%=stampTop %>px; 
+                        left: <%=stampLeft %>px; 
+                        transform: translate(-50%, -50%);
+                        width: 100px; 
+                        height: 100px; 
+                        border-radius: 50%; 
+                        border: 5px solid #E10909; 
+                        display: flex; 
+                        justify-content: center; 
+                        align-items: center; 
+                        font-size: 20px; 
+                        color: #E10909; 
+                        font-family: 'Bagel Fat One', sans-serif;">
+                <%=winnerFaceName%>상
+            </div>
         </figure> 
 
         <span class="osi">おし</span>
         <span class="desu">です ☆★</span>
     </h1>
-        
 </body>
 </html>

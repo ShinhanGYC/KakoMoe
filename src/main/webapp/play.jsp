@@ -52,101 +52,33 @@ if (actorList == null || actorList.isEmpty()) {
     </title>
 
     <link href="https://fonts.googleapis.com/css2?family=Bagel+Fat+One&display=swap" rel="stylesheet"> <!--게임화면 폰트(구글폰트)-->
-    <style>
-        body 
-        {
-            text-align: center; 
-            margin: 0;
-            height: 100vh; 
-            display: flex;                  /*안에 들어있는 것들 가운데 정렬 할 때 필요함*/
-            flex-direction: column;         /*세로 배치*/
-            justify-content: flex-start;    /*상단 배치*/
-            align-items: center;            /* 가로방향 중앙*/
-            font-family: 'Bagel Fat One', sans-serif;
-        }
-        h1
-        {
-            /*round 페이지 버튼이랑 같은 사이즈*/
-            width: 250px;            
-            height: 100px;            
-            font-size: 70px;         
-            background-color: #FFDDBD;  
-            color: #EB5C5C;            
-            border: none;            
-            border-radius: 10px;  
-            font-family: 'Bagel Fat One', sans-serif;
-            text-align: center;       
-        }
-
-        /*움짤*/
-        .gif-box
-        {
-            display: flex;              /*움짤 가로로*/
-            justify-content: center;    /*중간 정렬*/
-            align-items: center;
-            gap: 100px;
-        }
-        figure
-        {
-            display: flex;
-            flex-direction: column; /*움짤이랑 이름 세로로*/
-            align-items: center;
-        }
-        figcaption
-        {
-            font-size: 30px;
-            color: black;
-            margin-top: 20px;
-        }
-        img /*움짤 크기*/
-        {
-            width: 700px;
-            height: 400px;
-        }
-        .vs
-        {
-            position: absolute;     
-            top: 35%;
-            left: 50%;
-            transform: translateX(-50%); /*가로 중앙 정렬*/
-            font-size: 70px;
-            color: #ED6464;
-            font-weight: bold;
-        }
-
-        /* 선택된 움짤 */
-        .selected {
-            position: absolute;
-            top: 50%;               
-            left: 50%;              
-            transform: translate(-50%, -50%) scale(1.6); /* 크기 1.6배 커지게 */
-            z-index: 10;            /* 클릭된 움짤이 다른 요소 위로 이동되게 */
-            transition: transform 0.5s ease, left 0.5s ease, top 0.5s ease; /*부드럽게 선택되게*/
-        }
-
-        /* 선택하면 선택된 움짤이랑 강 수 외 나머지는 안보이게 */
-        .hidden {
-            display: none;
-        }
-    </style>
+    <link rel="stylesheet" href="CSS/play.css">
+    <style> <style type="text/css"> </style>
 </head>
-<%
-	
 
 
-%>
 <body>
     <!--강 수 표시-->
     
     <h1>
-    <% if (totalRound == 2) { %>
-    <%="결승" %>
-	<% } else { %>
-	<%=totalRound + "강"%>
-	<% } %>
+	    <% if (totalRound == 2) { %>
+	    <%="결승" %>
+		<% } else { %>
+		<%=totalRound + "강"%>
+		<% } %>
 	
     </h1>
-
+    
+	<!--현재 진행 표시-->
+	<div id="ongoing">
+		<% if (totalRound == 2) { %>
+		<%="당신의 최애는?"%>
+		<% } else { %>
+		(<%=totalRound / 2%>/<%=currentRound%>)
+		<% } %>
+	</div>
+	
+	
     <!--움짤-->
     <form id="roundForm" action="ServletRoundPlay" method="post">
         <div class="gif-box">
@@ -168,27 +100,34 @@ if (actorList == null || actorList.isEmpty()) {
     <script>
         const gifItems = document.querySelectorAll('.gif-item img');
         const vsText = document.querySelector('.vs');
+        const ongoing = document.querySelector('#ongoing');
         const figures = document.querySelectorAll('.gif-item');
         const selectedActorInput = document.getElementById('selectedActor');
         const roundForm = document.getElementById('roundForm');
 
         gifItems.forEach(function(gif) {
-            gif.addEventListener('click', function() {
-                // 선택된 값 초기화 및 효과 추가
-                gifItems.forEach(function(item) {
-                    item.classList.remove('selected');
-                });
-                gif.classList.add('selected');
-
-                // 숨기기 처리
-                document.querySelector('h1').classList.remove('hidden');
-                vsText.classList.add('hidden');
-                figures.forEach(function(figure) {
-                    if (!figure.contains(gif.closest('figure'))) {
-                        figure.classList.add('hidden');
-                    }
-                });
-
+			gif.addEventListener('click', function() {
+	             // 하나의 움짤만 선택되도록 
+	             gifItems.forEach(function(item) {
+	                 item.classList.remove('selected');
+	             });
+	             // 선택된 움짤에 효과 추가
+	             gif.classList.add('selected');
+	
+	             // 강 수는 남기고, 나머지 요소들 숨기기
+	             document.querySelector('h1').classList.remove('hidden');      
+	             document.querySelector('#ongoing').classList.add('hidden');   /*진행 상태 숨기기*/
+	             vsText.classList.add('hidden');                               /*vs 텍스트 숨기기*/
+	             figures.forEach(function(figure) {
+	                 if (!figure.contains(gif.closest('figure'))) 
+	                 {
+	                     figure.classList.add('hidden');                       /*선택 안 된 움짤 숨기기*/
+	                 }
+             	});
+               	const selectedFigCaption = gif.closest('figure').querySelector('figcaption');
+  	                selectedFigCaption.classList.add('hidden');  
+				
+			
                 // 선택된 배우 ID 저장
                 const selectedActorId = gif.dataset.actorId;
                 selectedActorInput.value = selectedActorId;
@@ -196,8 +135,8 @@ if (actorList == null || actorList.isEmpty()) {
                 setTimeout(function() {
                     roundForm.submit();
                 }, 3000); // 3000ms = 3초
+				});
             });
-        });
     </script>
 </body>
 
