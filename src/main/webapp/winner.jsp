@@ -1,14 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-<%@page import="java.awt.image.BufferedImage" %>
-<%@page import="java.io.File" %>
+
 <%@page import="javax.imageio.ImageIO" %>
 <%@page import="BeansHome.Actor.ActorDTO" %>
 <%@page import="Config.ConfigMgr" %>
-<%@ page import="java.net.URL" %>
-<%@ page import="org.jsoup.Jsoup"%>
-<%@ page import="org.jsoup.nodes.Document"%>
+
+
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -21,7 +20,7 @@
     <script>
         setTimeout(function() {
             window.location.href = 'recommend.jsp';
-        }, 30000);
+        }, 300000);
     </script>
 </head>
 <%
@@ -31,58 +30,55 @@
     String serverGif = ConfigMgr.getProperty("server.gif");
     String imageUrl = serverGif + winnerActor.getActorWorldcupPhoto();
 
-    int imageWidth = 0;
-    int imageHeight = 0;
-    int stampTop = 0;
-    int stampLeft = 0;
-    System.out.println(imageUrl);
-    try {
-
-    	 Document document = Jsoup.connect(imageUrl).get();
-    	 String title = document.title();
-         System.out.println("Page Title: " + title);
-         
-     
-     } catch (Exception e) {
-         e.printStackTrace();
-     }
-
  %>
 
 <body>
     <h1>
         <span class="watasi">わたしがあなたの</span><br>
- 
-        <figure style="position: relative;">
-            <!-- 이미지 -->
-            <img src="<%=serverGif + winnerActor.getActorWorldcupPhoto() %>" 
-                 onerror="this.onerror=null; this.src='no_image.jpg'" 
-                 alt="gif" 
-                 style="max-width: 100%; height: auto; border-radius: 10px; box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);">
-            <figcaption class="namae"><%=name%> </figcaption>
-            
-            <!-- 스탬프 -->
-            <div class="stamp" 
-                 style="position: absolute; 
-                        top: <%=stampTop %>px; 
-                        left: <%=stampLeft %>px; 
-                        transform: translate(-50%, -50%);
-                        width: 100px; 
-                        height: 100px; 
-                        border-radius: 50%; 
-                        border: 5px solid #E10909; 
-                        display: flex; 
-                        justify-content: center; 
-                        align-items: center; 
-                        font-size: 20px; 
-                        color: #E10909; 
-                        font-family: 'Bagel Fat One', sans-serif;">
-                <%=winnerFaceName%>상
-            </div>
-        </figure> 
+
+<figure>
+    <!-- 이미지 -->
+    <img src="<%=imageUrl%>" 
+         onerror="this.onerror=null; this.src='no_image.jpg'" 
+         alt="gif">
+    
+    <!-- 배우 이름 -->
+    <figcaption class="namae"><%=name%></figcaption>
+
+    <!-- 스탬프 -->
+    <div class="stamp" ><%=winnerFaceName%>상</div>
+</figure>
 
         <span class="osi">おし</span>
         <span class="desu">です ☆★</span>
     </h1>
 </body>
+<script>
+    window.onload = function() {
+        const figure = document.querySelector('figure');
+        const img = document.querySelector('figure img');
+        const stamp = document.querySelector('.stamp');
+
+        img.onload = function() {
+            const figureWidth = figure.offsetWidth; // figure의 가로 크기
+            const figureHeight = figure.offsetHeight; // figure의 세로 크기
+            const imgWidth = img.offsetWidth; // img의 가로 크기
+            const imgHeight = img.offsetHeight; // img의 세로 크기
+
+            // figure 세로 크기 조정
+            let adjustedHeight = Math.max(figureHeight, 640);
+            if (figureHeight > 640) {
+                adjustedHeight += 63.33;
+            }
+
+            // 스탬프 위치 계산
+            const stampTop = Math.min(imgHeight, adjustedHeight) - stamp.offsetHeight / 2;
+            const stampLeft = imgWidth; // img의 우측
+
+            // 스탬프 위치 설정
+            stamp.style.top = `${stampTop}px`;
+            stamp.style.left = `${stampLeft}px`;
+        };
+    };
+</script>
 </html>
