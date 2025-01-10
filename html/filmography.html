@@ -153,10 +153,12 @@
             font-size: 30px;
             color: #EB5C5C;
             margin-top: 90px;
-            margin-right: 1200px;
+            margin-right: 1010px;
             background-color: rgba(0, 0, 0, 0);
             font-weight: bold;
             font-family: 'Noto Sans KR', sans-serif;
+            min-width: 500px;                           /*박스 크기가 자동으로 늘어날 수 있도록*/
+            word-wrap: break-word;                      /*텍스트가 박스를 넘지 않도록*/
         }
 
 
@@ -164,7 +166,7 @@
         .recommend
         {
             display: flex;
-            gap: 310px;
+            gap: 295px;
             margin-top: 10px;
         }
         .recommend_set
@@ -258,7 +260,7 @@
             border-radius: 10px;  
             font-family: 'Bagel Fat One', sans-serif;
             margin-top: 50px;
-            transform: translateX(375%);  
+            transform: translateX(365%);  
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);                    /*그림자 - 수평 0, 수직 4px , 흐림 10px*/
             cursor: pointer;                                                /*버튼에 마우스 올리면 마우스 포인터 손 모양으로 바뀌게*/
             transition: all 0.3s ease;                                      /*마우스 올렸을 때 부드럽게*/
@@ -351,7 +353,7 @@
     </div>
 
     <!--이런 배우는 어떠세요-->
-    <div class="other_actor">이런 배우는 어떠세요? 🎬</div>
+    <div class="other_actor">이런 마요네즈상 배우는 어떠세요? 🎬</div>
 
     <div class="recommend">
         <div class="recommend_set">
