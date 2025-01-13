@@ -99,7 +99,7 @@ public class ServletRoundPlay extends HttpServlet {
 		try {		
 			
 			session = request.getSession();
-				
+			
 			// -------------------------------------------------------------------------------------------------------
 			// session 에서 설정되어 있는 currentRound 파라미터 읽기 
 			// 성공 : currentRound 변수 값 설정 
@@ -111,13 +111,14 @@ public class ServletRoundPlay extends HttpServlet {
 			else {
 				currentRound = (Integer) session.getAttribute("currentRound");
 			}
+			
  
 			// ---------------------------------------------------------------------------------------------------
 			// session 에서 설정되어 있는 totalRoynd 파라미터 읽기 
 			// 성공 : totalRound 변수 값 설정 
 			// 실패 : error.jsp 로 이동 |
 			// ---------------------------------------------------------------------------------------------------
-			if (session.getAttribute("totalRound") == null) {
+			if (session.getAttribute("totalRound") == null ) {
 				response.sendRedirect("error.jsp");
 			}
 			else {
@@ -144,6 +145,7 @@ public class ServletRoundPlay extends HttpServlet {
 			// --------------------------------------------------------------------------------------------------------------------------------------------------------
 			if (currentActorList.size() == 1) {
 			 session.setAttribute("winnerActor", currentActorList.get(0));
+			 
 			 response.sendRedirect("winner.jsp");			
 			}
 			else {
@@ -154,7 +156,9 @@ public class ServletRoundPlay extends HttpServlet {
 	
 		}
 		catch(Exception Ex){
+			session.invalidate();
 			Common.ExceptionMgr.DisplayException(Ex);	// 예외처리(콘솔)
+			
 		}
 	}
 
@@ -208,8 +212,7 @@ public class ServletRoundPlay extends HttpServlet {
 			// -----------------------------------------------------------------------------
 			nextRoundActorList = (ArrayList<ActorDTO>)session.getAttribute("nextRoundActorList");
 			
-			
-			
+
 			// -----------------------------------------------------------------------------
 			// (32강,16강,8강,4강 라운드가 끝날때 마다 servletRoundPlay 호출
 			// -----------------------------------------------------------------------------
@@ -260,8 +263,8 @@ public class ServletRoundPlay extends HttpServlet {
 			response.sendRedirect("ServletRoundPlay");
 		}
 		catch (Exception e) {
-			e.printStackTrace();
 			
+			e.printStackTrace();
 		}
 		
 		
