@@ -134,7 +134,7 @@ if (actorList == null || actorList.isEmpty()) {
                 // 3초 뒤에 폼 제출
                 setTimeout(function() {
                     roundForm.submit();
-                }, 3000); // 3000ms = 3초
+                }, 2000); // 3000ms = 3초
 				});
             });
     </script>
