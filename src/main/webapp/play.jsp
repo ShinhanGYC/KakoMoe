@@ -96,6 +96,10 @@ if (actorList == null || actorList.isEmpty()) {
         </div>
         <input type="hidden" id="selectedActor" name="selectedActor" value="">
     </form>
+    
+    <form>
+        <input type="submit" value="처음으로" id="resetbutton">
+    </form>
 
     <script>
         const gifItems = document.querySelectorAll('.gif-item img');
@@ -137,6 +141,12 @@ if (actorList == null || actorList.isEmpty()) {
                 }, 3000); // 3000ms = 3초
 				});
             });
+        
+        document.getElementById("resetbutton").onclick = function(event)
+        {
+            event.preventDefault(); // 이게 있어야 새로고침 방지 
+            window.location.href = "round.jsp"; 
+        }
     </script>
 </body>
 
