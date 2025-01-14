@@ -106,7 +106,8 @@
         }
 
         /* 선택된 움짤 */
-        .selected {
+        .selected 
+        {
             position: absolute;
             top: 50%;               
             left: 50%;              
@@ -121,6 +122,37 @@
         .hidden 
         {
             display: none;
+        }
+
+        /* 팡파레 효과 (콘페티) */
+        .confetti 
+        {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+        }
+        .confetti div 
+        {
+            position: absolute;
+            width: 10px;
+            height: 20px;
+            background-color: rgb(var(--color), 0.7);
+            animation: fall 3s linear infinite;
+        }
+        @keyframes fall 
+        {
+            0% {
+                transform: translateY(-100px) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
         }
     </style>
 </head>
@@ -146,7 +178,34 @@
         </figure>
     </div>
 
+    <div class="confetti" id="confetti"></div>
+
     <script>
+        // 팡파레 효과
+        function createConfettiPiece() 
+        {
+            const confetti = document.getElementById('confetti');
+            const piece = document.createElement('div');
+            piece.style.setProperty('--color', `${Math.random() * 255}, ${Math.random() * 255}, ${Math.random() * 255}`);   /*조각 색깔 랜덤*/
+            piece.style.left = `${Math.random() * 100}vw`;                                                                  /*조각 화면 랜덤한 위치에서 시작하도록*/                                                               
+            piece.style.animationDuration = `${Math.random() * 2 + 1}s`;                                                    /*조각 떨어지는 시간 랜덤 설정*/
+            confetti.appendChild(piece)
+
+            setTimeout(() => 
+            {
+                confetti.removeChild(piece);
+            }, 3000);                               /*3초 뒤 조각 제거*/
+        }
+
+        function startConfetti() 
+        {
+            for (let i = 0; i < 100; i++)   /*100번 반복*/
+            {
+                createConfettiPiece();      /*컨페티 조각 하나*/
+            }
+        }
+
+        // 움짤 선택
         const gifItems = document.querySelectorAll('.gif-item img');
         const ongoing = document.querySelector('#ongoing');
         const vsText = document.querySelector('.vs');
@@ -162,6 +221,9 @@
                 {
                     item.classList.remove('selected');
                 });
+
+                // 선택된 움짤에 팡파레 효과
+                startConfetti();
 
                 // 선택된 움짤에 효과 추가
                 gif.classList.add('selected');
