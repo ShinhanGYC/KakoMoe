@@ -7,7 +7,7 @@
 <%@ page import="org.json.simple.JSONArray" %>
 <%@ page import="org.json.simple.JSONObject" %>
 <%@ page import="org.json.simple.parser.JSONParser" %>
-<%@ page import="API.FindContentsInfo" %>
+<%@ page import="API.FindContentMgr" %>
 <%@ page import="Config.ConfigMgr" %>
 
 
@@ -38,7 +38,8 @@
 
 <%!public ActorDAO ActorDAO = new ActorDAO();
 String serverUrl = ConfigMgr.getProperty("server.url");
-String serverPfp = ConfigMgr.getProperty("server.pfp");%>
+String serverPfp = ConfigMgr.getProperty("server.pfp");
+%>
 <%
     int actorID = 0;
     boolean bContinue = false;
@@ -75,7 +76,7 @@ String serverPfp = ConfigMgr.getProperty("server.pfp");%>
             String[] categories = {"데뷔작", "대표작", "최신작"}; %>
        
        <% for (int i = 0; i< 3; i++) {
-          FindContentsInfo contents = new FindContentsInfo(winnerActorContents[i]);
+    	  FindContentMgr contents = new FindContentMgr(winnerActorContents[i]);
           int mediaId = contents.getId();
           String posterPath = contents.getPosterPath();
           String mediaType = contents.getMediaType();
@@ -108,7 +109,7 @@ String serverPfp = ConfigMgr.getProperty("server.pfp");%>
     <div class="recommend">
        <% if (bContinue){
           while (this.ActorDAO.DBMgr.Rs.next()){
-             FindContentsInfo contents = new FindContentsInfo(this.ActorDAO.DBMgr.Rs.getString("actor_hit"));
+        	  FindContentMgr contents = new FindContentMgr(this.ActorDAO.DBMgr.Rs.getString("actor_hit"));
              int mediaId = contents.getId();
              String HitPosterPath = contents.getPosterPath();
              String mediaType = contents.getMediaType();
