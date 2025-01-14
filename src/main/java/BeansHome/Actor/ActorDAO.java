@@ -43,7 +43,8 @@ public class ActorDAO
 			
 			this.DBMgr = new DBOracleMgr();
 			
-			this.DBMgr.SetConnectionString("gyc2024.duckdns.org", 5004, "educ", "educ", "XE");
+			//this.DBMgr.SetConnectionString("gyc2024.duckdns.org", 5004, "educ", "educ", "XE");
+			this.DBMgr.SetConnectionStringFromProperties("db.properties");	
 			// -----------------------------------------------------------------------------
 		}
 		catch (Exception Ex)
