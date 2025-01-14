@@ -1,6 +1,6 @@
 // #################################################################################################
-// FindContentsInfo.java - 서블릿 이상형 월드컵 라운드 초기 설정 모듈 (DB에서 배우 정보 추출 + 리스트 생성 +  리스트 셔플 + Session 설정 + ServletRoundPlay 전송) 
-// FindContentsInfo.java - recommend.jsp API 처리 클래스 (API 키 관리 클래스 (ApiKeyManager), API 호출 + JSON 파싱 + GETTER) 
+// FindContentMgr.java - 서블릿 이상형 월드컵 라운드 초기 설정 모듈 (DB에서 배우 정보 추출 + 리스트 생성 +  리스트 셔플 + Session 설정 + ServletRoundPlay 전송) 
+// FindContentMgr.java - recommend.jsp API 처리 클래스 (API 키 관리 클래스 (ApiKeyManager), API 호출 + JSON 파싱 + GETTER) 
 // #################################################################################################
 // ═════════════════════════════════════════════════════════════════════════════════════════
 // 외부모듈 영역
@@ -42,9 +42,9 @@ class ApiKeyManager {
 }
 
 /***********************************************************************
-* FindContentsInfo			: TMDB 데이터 검색 클래스
+* FindContentMgr			: TMDB 데이터 검색 클래스
 ***********************************************************************/
-public class FindContentsInfo
+public class FindContentMgr
 {
 	private int Id;
 	private String posterPath;
@@ -53,10 +53,10 @@ public class FindContentsInfo
 	// 생성자 관리 - 필수영역(인스턴스함수)
  	// —————————————————————————————————————————————————————————————————————————————————————
  	/***********************************************************************
- 	 * FindContentsInfo(String query)		: 생성자
+ 	 * FindContentMgr(String query)		: 생성자
  	 * @param void							: None
  	 ***********************************************************************/
-	public FindContentsInfo(String query) {
+	public FindContentMgr(String query) {
 		if (query != null && !query.trim().isEmpty()) {
 	        try {
 	        	// -----------------------------------------------------------------	
