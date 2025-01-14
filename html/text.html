@@ -1,82 +1,61 @@
-<script>
-    var text = "";
-    var images = []; //이미지 데이터들을 담을 곳
-    var rounds = ["16강", "8강", "4강", "결승", "우승자"]; // 라운드별 이미지 수
-    var roundIndex = 0; // 현재 라운드 인덱스
-    var matches = rounds[roundIndex] === "16강" ? 8 : (rounds[roundIndex] === "8강" ? 4 : (rounds[roundIndex] === "4강" ? 2 : 1)); // 현재 라운드의 경기 수
-    var currentMatch = 0; // 현재 진행 중인 경기
-    var sImages = []; // 선택한 이미지 저장 배열
-    var winnerImage = "우승자";
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ranking</title>
+    <style>
+        body {
+            text-align: center;                         /* 텍스트를 수평으로 중앙 정렬 */
+        }
+        table {
+            width: 80%;
+            border-collapse: collapse;
+            margin: 0 auto;                             /* 표를 수평 중앙 정렬 */
+        }
 
+        th, td {
+            border: 1px solid black;
+            padding: 10px;
+            text-align: center;
+        }
+        th {
+            background-color: white;
+        }
 
-    //오디오 함수 
-    function play() {
-      var audio = document.getElementById('audio_play');
-      if (audio.paused) {
-        audio.play();
-      } else {
-        audio.pause();
-        audio.currentTime = 0;
-      }
-    }
+    </style>
+</head>
 
-    // 이미지 파일 이름 배열 생성 (img 폴더 안에 있는 이미지 파일)
-    for (var i = 1; i <= 16; i++) {
-      // 이미지 파일 이름을 형식에 맞게 생성 (01,02이런것도 표시 가능!!)
-      var fileName = "../img/mm" + (i < 10 ? "0" : "") + i + ".jpg";
-      images.push(fileName);
-    }
+<body>
+    <h1>심쿵! 이상형 랭킹</h1>
+    <table>
+        <tr>
+            <th>순위</th>
+            <th>이름</th>
+            <th>얼굴상</th>
+            <th>횟수</th>
+        </tr>
 
-    //이미지가 랜덤으로 배정
-    images.sort(function(a, b) {
-      return 0.5 - Math.random();
-    });
+        <tr>
+            <td>1</td>
+            <td>사카구치 켄타로</td>
+            <th>소금상</th>
+            <td>32</td>
+        </tr>
 
-    //이미지를 보여줌
-    showImg(currentMatch);
-    //이미지 2개와 라운드 (16강,8강... 이런거)
-    function showImg(matchIndex) {
-      var matchStartIndex = matchIndex * 2;
-      document.getElementById('image1').src = images[matchStartIndex];
-      document.getElementById('image2').src = images[matchStartIndex + 1];
-      document.getElementById('round').innerHTML = rounds[roundIndex];
-    }
+        <tr>
+            <td>2</td>
+            <td>기무라 타쿠야</td>
+            <th>간장상</th>
+            <td>28</td>
+        </tr>
 
-    //이게 선택한 이미지를 저장하고 다음 라운드에 보내는 함수
-    function change(n) {
-    sImages[currentMatch] = images[currentMatch * 2 + n]; //여기가 선택한 이미지 -
-    currentMatch++; // 경기를 계속 진행
-
-    //경기 진행
-    if (currentMatch >= matches) {
-    if (roundIndex < rounds.length - 1) {
-      roundIndex++; // 다음 라운드로 진행
-      matches = rounds[roundIndex] === "16강" ? 8 : (rounds[roundIndex] === "8강" ? 4 : (rounds[roundIndex] === "4강" ? 2 : 1));
-      currentMatch = 0; // 경기 종료를 나타냄
-
-       // 우승자가 결정됨
-      if (roundIndex === rounds.length - 1) {
-        winnerImage = sImages[0]; //우승자
-        document.getElementById('cal').innerHTML = "";
-        document.getElementById('winnerImage').src = winnerImage;
-        document.getElementById('winnerContainer').style.display = 'block';
-        // 이미지 요소를 숨김 -> 우승자는 1개니깐
-        document.getElementById('image1').style.display = 'none';
-        document.getElementById('image2').style.display = 'none';
-      } else {
-        // 다음 라운드의 이미지를 랜덤으로 설정 
-        images = sImages.slice(0, matches * 2);
-        images.sort(function (a, b) {
-          return 0.5 - Math.random();
-        });
-        showImg(currentMatch);
-      }
-    } else {
-      // 모든 라운드가 종료됨 -> '당신의 이상형' 텍스트를 보여줌
-      document.getElementById('cal').innerHTML = "당신의 이상형";
-    }
-  } else {
-    showImg(currentMatch);
-  }
-}
-document.getElementById('cal').innerHTML = text; //미리 설정했던 텍스트를 보여줌 (16강,8강... 이런거)
+        <tr>
+            <td>3</td>
+            <td>아야노 고</td>
+            <th>소금상</th>
+            <td>21</td>
+        </tr>
+    </table>
+</body>
+</html>
