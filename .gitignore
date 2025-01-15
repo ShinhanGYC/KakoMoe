@@ -1,2 +1,10 @@
 /build/
+.classpath
+.metadata/
+.settings/
+/src/main/java/API/apikey.properties
 /bin/
+/html/된장 전처리/
+/html/된장상/
+/html/소금상/
+/html/소금상 전처리/
