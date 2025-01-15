@@ -1,4 +1,4 @@
-package BeansHome.Actor;
+package Servlet;
 
 import java.io.File;
 import java.io.IOException;
@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
+import BeansHome.Actor.*;
+
 
 @WebServlet("/ActorInsertServlet")
 @MultipartConfig(
@@ -47,13 +49,13 @@ public class ActorInsertServlet extends HttpServlet {
         photoPart.write(photoPath);
 
         // DTO 설정
-        ActorDTO actorDTO = new ActorDTO();
+        OldActorDTO actorDTO = new OldActorDTO();
         actorDTO.setActno(Integer.parseInt(actnoStr));
         actorDTO.setName(name);
         actorDTO.setPhoto("images/photo/" + photoName);
 
         // DAO 호출
-        ActorDAO actorDAO = new ActorDAO();
+        OldActorDAO actorDAO = new OldActorDAO();
         boolean result = false;
         String resultMessage;
         try {

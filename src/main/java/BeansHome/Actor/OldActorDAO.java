@@ -1,21 +1,16 @@
-//#################################################################################################
-//ActorDTO.java - 배우검색 DTO 모듈
-//#################################################################################################
-//═════════════════════════════════════════════════════════════════════════════════════════
-//외부모듈 영역
-//═════════════════════════════════════════════════════════════════════════════════════════
 package BeansHome.Actor;
 
-import Common.ExceptionMgr;
 
+import Common.ExceptionMgr;
+import DAO.DBOracleMgr;
 //═════════════════════════════════════════════════════════════════════════════════════════
 //사용자정의 클래스 영역
 //═════════════════════════════════════════════════════════════════════════════════════════
 /***********************************************************************
-* ActorDTO		: 배우검색 DTO 클래스<br>
+* ActorDAO		: Actor DAO 클래스<br>
 * Inheritance	: None | 부모 클래스 명
 ***********************************************************************/
-public class ActorDTO
+public class OldActorDAO
 {
 	// —————————————————————————————————————————————————————————————————————————————————————
 	// 전역상수 관리 - 필수영역
@@ -28,50 +23,28 @@ public class ActorDTO
 	// —————————————————————————————————————————————————————————————————————————————————————
 	// 전역변수 관리 - 필수영역(인스턴스변수)
 	// —————————————————————————————————————————————————————————————————————————————————————
-	
-	// PRIMARY KEY FIELDS
-	/** actorID	: Beans 배우ID 필드(JSP 입력 객체와 1:1 대응, 소문자로 시작) */
-	private Integer	actorID = 0;
-	/** faceCode	: Beans 얼굴코드 필드(JSP 입력 객체와 1:1 대응, 소문자로 시작) */
-	private Integer	faceCode = 0;
-	
-	// ACTOR TABLE FIELDS
-	/** actorName	: Beans 배우이름 필드(JSP 입력 객체와 1:1 대응, 소문자로 시작) */
-	private String	actorName = null;
-	/** actorDebut	: Beans 배우데뷔작 필드(JSP 입력 객체와 1:1 대응, 소문자로 시작) */
-	private String	actorDebut = null;
-
-	/** actorDebut	: Beans 배우히트작 필드(JSP 입력 객체와 1:1 대응, 소문자로 시작) */
-	private String	actorHit = null;
-	/** actorDebut	: Beans 배우최신작 필드(JSP 입력 객체와 1:1 대응, 소문자로 시작) */
-	private String	actorNewest = null;
-
-	// FACE TABLE FIELDS
-	/** faceName	: Beans 얼굴상 이름 필드(JSP 입력 객체와 1:1 대응, 소문자로 시작) */
-	private String	faceName = null;
-	
-	// PHOTO TABLE FIELDS
-	/** actorProfilePhoto	:Beans 배우프로필사진 필드(JSP 입력 객체와 1:1 대응, 소문자로 시작) */
-	private String	actorProfilePhoto = null;
-	/** actorWorldcupPhoto	:Beans 배우이상형월드컵사진 필드(JSP 입력 객체와 1:1 대응, 소문자로 시작) */
-	private String	actorWorldcupPhoto = null;
-	
-	
+	/** DBMgr : 오라클 데이터베이스 DAO 객체 */
+	public DBOracleMgr DBMgr = null;
 	// —————————————————————————————————————————————————————————————————————————————————————
 	// 생성자 관리 - 필수영역(인스턴스함수)
 	// —————————————————————————————————————————————————————————————————————————————————————
 	/***********************************************************************
-	 * ActorDTO()	: 생성자
+	 * ActorDAO()	: 생성자
 	 * @param void	: None
 	 ***********************************************************************/
-	public ActorDTO()
+	public OldActorDAO()
 	{
 		try
 		{
 			// -----------------------------------------------------------------------------
 			// 기타 초기화 작업 관리
 			// -----------------------------------------------------------------------------
+			ExceptionMgr.SetMode(ExceptionMgr.RUN_MODE.DEBUG);
 			
+			this.DBMgr = new DBOracleMgr();
+			this.DBMgr.SetConnectionString("localhost", 1521, "educ", "educ", "XE");
+
+			//this.DBMgr.SetConnectionString("gyc2024.duckdns.org", 5004, "educ", "educ", "XE");
 			// -----------------------------------------------------------------------------
 		}
 		catch (Exception Ex)
@@ -86,92 +59,86 @@ public class ActorDTO
 	// —————————————————————————————————————————————————————————————————————————————————————
 	// 전역함수 관리 - 필수영역(인스턴스함수)
 	// —————————————————————————————————————————————————————————————————————————————————————
-	public Integer getActorID() {
-		return actorID;
+	/***********************************************************************
+	 * ReadActorList()	: 배우정보 읽기
+	 * @param  OldActorDTO	: 배우정보 DTO(조건용)
+	 * @return boolean	: 쿼리 실행 여부(true|false)
+	 * @throws Exception 
+	 ***********************************************************************/
+	public boolean ReadActorList(OldActorDTO actorDTO) throws Exception
+	{
+		String sSql = null;				// DML 문장
+		Object[] oPaValue = null;		// DML 문장에 필요한 파라미터 객체
+		boolean bResult = false;
+		
+		try
+		{
+			// -----------------------------------------------------------------------------
+			// 배우정보 읽기
+			// -----------------------------------------------------------------------------
+			if (actorDTO.getName() != null)
+				
+			{
+				if (this.DBMgr.DbConnect() == true)
+				{
+					// 배우정보 읽기 DML
+					sSql = "BEGIN SP_TEST_ACTOR_R(?,?,?,?); END;";
+					
+					// IN 파라미터 만큼 메모리 할당
+					oPaValue = new Object[3];
+					
+					oPaValue[0] = "0";
+					oPaValue[1] = actorDTO.getName();
+					oPaValue[2] = "-1";
+				
+
+					// DML 문장 실행
+					if (this.DBMgr.RunQuery(sSql, oPaValue, 4, true) == true)
+					{
+						bResult = true;
+					}
+				}
+			}
+			
+			// -----------------------------------------------------------------------------
+		}
+		catch (Exception Ex)
+		{
+			ExceptionMgr.DisplayException(Ex);		// 예외처리(콘솔)
+		}
+		
+		return bResult;
+	}
+	
+	public boolean insertActor(OldActorDTO actorDTO) throws Exception {
+	    String sSql = null;				// DML 문장
+		Object[] oPaValue = null;		// DML 문장에 필요한 파라미터 객체
+		boolean bResult = false;
+		
+	    try {
+	    	if (this.DBMgr.DbConnect() == true)
+			{
+	    	sSql = "BEGIN SP_TEST_ACTOR_U(?,?,?); COMMIT; END;";
+				System.out.println(sSql);
+				oPaValue = new Object[3];
+			
+				
+				oPaValue[0] = "0"; 
+				oPaValue[1] = actorDTO.getName(); 
+				oPaValue[2] = actorDTO.getPhoto();
+				if (this.DBMgr.RunQuery(sSql, oPaValue, 0 , false) == true){
+					bResult = true;
+				}
+			}
+	    }
+	    catch (Exception Ex){
+			ExceptionMgr.DisplayException(Ex);		// 예외처리(콘솔)
+		}
+		
+		return bResult;
 	}
 
-
-	public void setActorID(Integer actorID) {
-		this.actorID = actorID;
-	}
-
-
-	public Integer getFaceCode() {
-		return faceCode;
-	}
-
-
-	public void setFaceCode(Integer faceCode) {
-		this.faceCode = faceCode;
-	}
-
-
-	public String getActorName() {
-		return actorName;
-	}
-
-
-	public void setActorName(String actorName) {
-		this.actorName = actorName;
-	}
-
-
-	public String getActorDebut() {
-		return actorDebut;
-	}
-
-	public void setActorDebut(String actorDebut) {
-		this.actorDebut = actorDebut;
-	}
-
-	public String getActorHit() {
-		return actorHit;
-	}
-
-	public void setActorHit(String actorHit) {
-		this.actorHit = actorHit;
-	}
-
-	public String getActorNewest() {
-		return actorNewest;
-	}
-
-	public void setActorNewest(String actorNewest) {
-		this.actorNewest = actorNewest;
-	}
-
-
-	public String getFaceName() {
-		return faceName;
-	}
-
-
-	public void setFaceName(String faceName) {
-		this.faceName = faceName;
-	}
-
-
-	public String getActorProfilePhoto() {
-		return actorProfilePhoto;
-	}
-
-
-	public void setActorProfilePhoto(String actorProfilePhoto) {
-		this.actorProfilePhoto = actorProfilePhoto;
-	}
-
-
-	public String getActorWorldcupPhoto() {
-		return actorWorldcupPhoto;
-	}
-
-
-	public void setActorWorldcupPhoto(String actorWorldcupPhoto) {
-		this.actorWorldcupPhoto = actorWorldcupPhoto;
-	}
-	// —————————————————————————————————————————————————————————————————————————————————————
 }
 //#################################################################################################
 //<END>
 //#################################################################################################
-
