@@ -15,7 +15,6 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
-
 //═════════════════════════════════════════════════════════════════════════════════════════
 // 사용자정의 클래스 영역
 //═════════════════════════════════════════════════════════════════════════════════════════
@@ -65,6 +64,7 @@ public class FindContentMgr
 	        	ApiKeyManager key = new ApiKeyManager();
 	        	String apiKey = key.getApiKey();
 	        	
+
 	        	int currentPage = 1; // 현재 페이지
 	        	int totalPages = 1;	 // 전체 페이지 (초기값)
 	        	
@@ -79,7 +79,7 @@ public class FindContentMgr
 		            connection.setConnectTimeout(5000);
 	                connection.setReadTimeout(5000);
 
-		            try (java.io.BufferedReader reader = new java.io.BufferedReader(new java.io.InputStreamReader(connection.getInputStream()))) {
+	                try (java.io.BufferedReader reader = new java.io.BufferedReader(new java.io.InputStreamReader(connection.getInputStream(), "UTF-8"))) {
 		                StringBuilder responseBuilder = new StringBuilder();
 		                String line;
 		                while ((line = reader.readLine()) != null) {
@@ -89,7 +89,7 @@ public class FindContentMgr
 						// JSON 형식 String -> JSONObject
 						// -----------------------------------------------------------------
 		                String response = responseBuilder.toString();
-
+		                	
 		                JSONParser parser = new JSONParser();
 		                JSONObject json = (JSONObject) parser.parse(response);
 		                
