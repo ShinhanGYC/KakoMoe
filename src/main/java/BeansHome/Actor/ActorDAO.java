@@ -109,7 +109,12 @@ public class ActorDAO
 		
 		return bResult;
 	}
-	
+	/***********************************************************************
+	 * takeRandomActorForWorldcup()	: 이상형 월드컵용 배우 정보 무작위로 가져오기
+	 * @param  roundValue	: 필요한 배우의 수
+	 * @return boolean	: 쿼리 실행 여부(true|false)
+	 * @throws Exception 
+	 ***********************************************************************/
 	public boolean takeRandomActorForWorldcup(int roundValue) throws Exception
 	{
 		String sSql = null;				// DML 문장
@@ -139,6 +144,12 @@ public class ActorDAO
 		}
 		return bResult;
 	}
+	/***********************************************************************
+	 * takeRecommendActorSameFaceCode()	: 같은 얼굴상을 가진 배우 정보 3명 랜덤으로 가져오기
+	 * @param  actorID	: 배우 ID (조건용)
+	 * @return boolean	: 쿼리 실행 여부(true|false)
+	 * @throws Exception 
+	 ***********************************************************************/
 	public boolean takeRecommendActorSameFaceCode(int actorId) throws Exception
 	{
 		String sSql = null;				// DML 문장
